@@ -3,6 +3,7 @@
 *.yml
 build/
 node_modules/
+examples/
 test/
 src/
 gulpfile.js

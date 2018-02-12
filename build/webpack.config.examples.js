@@ -4,17 +4,19 @@
 const path = require("path");
 const webpack = require("webpack");
 const uglify = require("uglifyjs-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+console.log(456778)
 
 module.exports = {
     devtool: 'source-map',
-    entry: "./src/index.js",
+    entry: "./examples/main",
     output: {
-        path: path.resolve(__dirname, './dist'),
-        publicPath: '/dist/',
-        filename: 'Ttree.min.js',
-        libraryTarget: 'umd',
-        library: 'Ttree',
-        umdNamedDefine: true
+        // path: path.resolve(__dirname, '../examples/dist'),
+        path: path.join(__dirname, '../examples/dist'),
+        publicPath: '',
+        // filename: 'Ttree.min.js',
+        filename: '[name].js',
     },
     module: {
         // noParse: /es6-promise\.js$/,
@@ -50,6 +52,11 @@ module.exports = {
             "process.env": {
                 NODE_ENV: JSON.stringify("production")
             }
-        })
+        }),
+        new HtmlWebpackPlugin({
+            inject: true,
+            // filename: path.join(__dirname, '../examples/dist/index.html'),
+            template: path.join(__dirname, '../examples/index.html')
+        }),
     ]
 };

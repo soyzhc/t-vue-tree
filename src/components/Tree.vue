@@ -154,7 +154,7 @@
 
                     let jAllChildren = parentNode.children;
                     for(let j = 0,jlen = jAllChildren.length;j<jlen;j++){
-                        console.log("cc");
+                        console.log("cc_22");
                         let _jChild = jAllChildren[j];
 //                        if(_jChild.indeterminated){
 //                            isChildenContainIndeterminated = true;
