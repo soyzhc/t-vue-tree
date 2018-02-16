@@ -6,8 +6,6 @@ const webpack = require("webpack");
 const uglify = require("uglifyjs-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-console.log(456778)
-
 module.exports = {
     devtool: 'source-map',
     entry: "./examples/main",

@@ -17,6 +17,9 @@
 
 .Ttree-wrapper {
     .T-tree-box-sizing;
+    height: 100%;
+    min-height: 50px;//加入最小高度，以防止用户没有正确的给tree组件设定最外容器元素的高度
+    overflow: auto;
     * {
         .T-tree-box-sizing;
     }

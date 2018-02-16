@@ -1,0 +1,44 @@
+//变量和mixin等 start--
+.border-box(){
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.mp0(){
+    margin: 0;
+    padding: 0;
+}
+//变量和mixin等 end--
+
+
+.T-vue-tree{
+    .border-box;
+    .mp0;
+    padding:15px;
+    * {
+        .border-box;
+        .mp0;
+    }
+    ul,ol{
+        list-style:none;
+    }
+}
+
+.example-box {
+    .border-box;
+    -webkit-box-shadow: 0 0 2px 0 purple;
+    -moz-box-shadow: 0 0 2px 0 purple;
+    box-shadow: 0 0 2px 0 purple;
+    height: 300px;
+    width: 80%;
+    margin:0 0 10px;
+
+    &:last-child{
+        margin:0;
+    }
+    .example-title{
+        color:#333;
+        font-size:16px;
+        line-height: 1.5;
+    }
+}

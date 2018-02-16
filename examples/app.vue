@@ -1,4 +1,4 @@
-<style scoped lang="less">
+<style lang="less">
     @import 'styles/common.less';
 </style>
 <template>

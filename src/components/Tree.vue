@@ -31,6 +31,14 @@
             showCheckbox: {
                 type: Boolean,
                 default: false
+            },
+            treeSelectable: {
+                type: Boolean,
+                default: true
+            },
+            treeSelectType: {
+                type: String,
+                default: 'single'
             }
         },
         data(){

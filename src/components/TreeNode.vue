@@ -1,41 +1,46 @@
 <!--
-    Created by ty 2018/01/19/10:47:19
+    Created by 879372858@qq.com 2018/01/19/10:47:19
 -->
 <style scoped lang="less">
     @import '../styles/TreeNode.less';
 </style>
 
 <template>
-    <ul class="TtreeNode-wrapper"
-        :class="computedNodeWrapperCls"
-        :style="computedNodeWrapperStyles">
-        <li>
+    <compoTransition>
+        <ul class="TtreeNode-wrapper"
+            :class="computedNodeWrapperCls"
+            :style="computedNodeWrapperStyles">
+            <li>
            <span class="icon-wrapper">
                <span v-if="data.children && data.children.length" @click="handleExpand"></span>
            </span>
-            <span class="checkbox-wrapper" v-if="data.checkbox" :class="computedCheckBoxCls">
+                <span class="checkbox-wrapper" v-if="data.checkbox" :class="computedCheckBoxCls">
                 <span class="checkbox-inner"></span>
                 <input type="checkbox"
                        :checked="data.checked"
                        class="checkbox-checkbox"
                        @change="checkboxChange">
            </span>
-            <span class="text-wrapper" :class="computedTextCls" @click="handleClick">
+                <span class="text-wrapper" :class="computedTextCls" @click="handleClick">
                {{data.title}}
            </span>
 
-            <TtreeNode v-if="data.expanded" v-for="(child, i) in data.children" :key="i"
-                       :data="child"
-                       :show-checkbox="data.checkbox">
-            </TtreeNode>
-        </li>
-    </ul>
+                <TtreeNode v-if="data.expanded" v-for="(child, i) in data.children" :key="i"
+                           :data="child">
+                </TtreeNode>
+            </li>
+        </ul>
+    </compoTransition>
 </template>
 
 <script>
+    import compoTransition from './Transition';
+
     export default{
         name: 'TtreeNode',
-        components: {},
+        components: {
+            compoTransition
+        },
         props: {
             data: {
                 type: Object,
@@ -141,7 +146,7 @@
                     parent && (name = parent.$options.name);
                 }
 
-                console.log('getParent(), name理应为Ttree,实际为',name);
+                console.log('getParent(), name理应为Ttree,实际为', name);
                 return parent;
 
             },

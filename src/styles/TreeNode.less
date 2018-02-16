@@ -17,7 +17,7 @@
         .icon-wrapper{
             width: 12px;
             height: 12px;
-            margin:8px 6px 0 0;
+            margin:8px 6px 0 6px;
             display: block;
             float: left;
             &>span{
@@ -25,6 +25,12 @@
                 border:6px solid #49505f;
                 border-color:#49505f transparent transparent;
                 cursor: pointer;
+                transition:all .2s;
+                -webkit-transform-origin:50% 25%;
+                -moz-transform-origin:50% 25%;
+                -ms-transform-origin:50% 25%;
+                -o-transform-origin:50% 25%;
+                transform-origin:50% 25%;
             }
         }
         .checkbox-wrapper{
@@ -43,10 +49,11 @@
                 border-radius: 2px;
                 background-color: #fff;
                 transition: border-color .2s ease-in-out,background-color .2s ease-in-out,box-shadow .2s ease-in-out;
+                vertical-align: middle;
                 &:after{
                     content: "";
                     display: table;
-                    width: 4px;
+                    width: 3px;
                     height: 8px;
                     position: absolute;
                     top: 1px;
@@ -62,7 +69,9 @@
                 position: absolute;
                 z-index:1;
                 left:0;
-                top:0;
+                top:5px;
+                width: 14px;
+                height: 14px;
                 cursor: pointer;
                 opacity: 0;
             }
@@ -72,18 +81,6 @@
                     background-color: #2d8cf0;
                     border-color:#2d8cf0;
                     &:after{
-                        //content: "";
-                        //display: table;
-                        //width: 4px;
-                        //height: 8px;
-                        //position: absolute;
-                        //top: 1px;
-                        //left: 4px;
-                        //border: 2px solid #fff;
-                        //border-top: 0;
-                        //border-left: 0;
-                        //transform: rotate(45deg) scale(1);
-                        //transition: all .2s ease-in-out;
                     }
                 }
             }
@@ -94,8 +91,8 @@
                     border-color:#2d8cf0;
                     &:after{
                         content: "";
-                        width: 8px;
-                        height: 1px;
+                        width: 7px;
+                        height: 0;
                         position: absolute;
                         top: 5px;
                         left: 2px;
@@ -116,6 +113,12 @@
                 background: #ced7e0;
             }
         }
+
+        /* 伸缩展开的动画 --start--*/
+        &.transition{
+            transition:all .2s;
+        }
+        /* 伸缩展开的动画 --end--*/
     }
 
     .TtreeNode-wrapper{
@@ -132,9 +135,11 @@
        &.collapsed{
            .icon-wrapper{
                &>span{
-                   transform: rotate(-90deg) translate(3px,6px)
+                   transition:all .2s;
+                   transform: rotate(-90deg);
                }
            }
        }
     }
+
 }
