@@ -26,7 +26,9 @@
            </span>
 
                 <TtreeNode v-if="data.expanded" v-for="(child, i) in data.children" :key="i"
-                           :data="child">
+                           :data="child"
+                           :treeSelectable="treeSelectable"
+                           :treeSelectType="treeSelectType">
                 </TtreeNode>
             </li>
         </ul>
@@ -51,12 +53,22 @@
             checkbox: {
                 type: Boolean,
                 default: false
+            },
+            treeSelectable: {//树是否支持选中效果，如果此处为false，那么即使节点数据上有select属性也无效
+                type: Boolean,
+                default: true
+            },
+            treeSelectType: {
+                type: String,
+                default: 'single'
             }
         },
         data(){
             return {
 
 //                treeAllData:[]
+                nodeSelectable: true,
+                nodeSelectType: 'single'
             }
         },
         computed: {
@@ -99,10 +111,10 @@
                 let that = this;
                 let result = '';
 
-                if (that.data.selected) {
+                debugger;
+                if (that.nodeSelectable && that.data.selected) {
                     result += 'text-selected';
                 }
-
                 return result;
             }
         },
@@ -117,7 +129,9 @@
                 let parent = that._getParent();
 
                 /* このノードのselected状態を変え */
-                that.$set(that.data, 'selected', !that.data.selected);
+                if(that.nodeSelectable){
+                    that.$set(that.data, 'selected', !that.data.selected);
+                }
                 parent.$emit.apply(parent, ['handleClickText'].concat(that.data));
             },
 
@@ -167,6 +181,16 @@
         created(){
             let that = this;
 //            console.log(that.data, that.data.constructor);
+
+            /* 设置所有节点的选中配置 --start-- */
+            console.log('node created', that.treeSelectable)
+            if(typeof that.treeSelectable === 'boolean'){
+                that.nodeSelectable = that.treeSelectable;
+                if(that.treeSelectType !== 'multiple'){
+                    that.nodeSelectType = 'single';
+                }
+            }
+            /* 设置所有节点的选中配置 --end-- */
 
         }
     }

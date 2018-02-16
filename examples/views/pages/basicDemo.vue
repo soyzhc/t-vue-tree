@@ -23,6 +23,8 @@
             <p class="example-title">方法示例：</p>
             <button @click="getCheckedNodes('checked')">获取checked节点</button>
             <button @click="getCheckedNodes('indeterminated')">获取 半勾选的节点</button>
+            <button @click="getSelectedNodes()">获取所有选中的节点</button>
+
         </div>
     </div>
 </template>
@@ -34,7 +36,7 @@
         data(){
             return {
                 treeSelectable:true,//点击树节点时，是否有选中效果，默认true,
-                treeSelectType:"single",//点击树节点时的选中效果是单选还是多选,默认single
+                treeSelectType:"multiple",//点击树节点时的选中效果是单选还是多选,默认single
                 treeData: [
                     {
                         title: 'parent 1',
@@ -179,6 +181,12 @@
                 } else {
                     throw "传参值仅为'checked'或者'indeterminated'"
                 }
+            },
+
+            getSelectedNodes(){
+                let that = this;
+                let result = that.$refs.demotree.getSelectedNodes();
+                console.log(result);
             }
         }
     }

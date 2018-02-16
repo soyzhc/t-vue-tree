@@ -1,4 +1,3 @@
-
 <style scoped lang="less">
     @import '../styles/Tree.less';
 </style>
@@ -8,7 +7,9 @@
          :class="computedTreeWrapperCls"
          :style="computedTreeWrapperStyles">
         <TtreeNode v-for="(item, i) in treeAllData" :key="i"
-                   :data="item">
+                   :data="item"
+                   :treeSelectable="treeSelectable"
+                   :treeSelectType="treeSelectType">
         </TtreeNode>
     </div>
 </template>
@@ -32,7 +33,7 @@
                 type: Boolean,
                 default: false
             },
-            treeSelectable: {
+            treeSelectable: {//树是否支持选中效果，如果此处为false，那么即使节点数据上有select属性也无效
                 type: Boolean,
                 default: true
             },
@@ -76,6 +77,13 @@
                 console.log('getCheckedNodes in source/Ttree.vue', type);
                 return that.flatTree.filter(obj => obj.node[type]).map(obj => obj.node);
             },
+
+            getSelectedNodes(){
+                let that = this;
+                console.log('getSelectedNodes in source/Ttree.vue');
+                return that.flatTree.filter(obj => obj.node['selected']).map(obj => obj.node);
+            },
+
             _handleCheckbox(params){
                 let that = this;
 
@@ -89,9 +97,9 @@
                 that.$set(node, 'indeterminated', false);
 
                 that._propagateUp(currentNodeKey);
-                (params.children && params.children.length) && that._propagetaDown(node,{
-                    checked:currentCheckVal,
-                    indeterminated:false
+                (params.children && params.children.length) && that._propagetaDown(node, {
+                    checked: currentCheckVal,
+                    indeterminated: false
                 });
 
                 //今操作してるのツリーノードを外に通知
@@ -110,12 +118,23 @@
                 let currentNodeKey = params.nodeKey;
 
                 const node = that.flatTree[currentNodeKey].node;
-                console.log(node);
+                console.log('_handleClickText', node);
 
-                that.$set(node, 'selected', currentSelectVal);
+                /* 仅当树节点设置了 treeSelectable 且其值为true时，才有相关的select选中效果和onSelect事件 */
+                if(that.treeSelectable && (typeof that.treeSelectable === 'boolean')){
+                    /* 根据 '单选\多选' 的种类不同，而对其他树节点做取消选中操作(单选) */
+                    let _treeSelectType = (that.treeSelectType === 'multiple') ? 'multiple' : 'single';
 
-                //今操作してるのツリーノードを外に通知
-                that.$emit('onSelect', params);
+                    if(_treeSelectType === 'single'){
+                        that.flatTree.forEach(it=>{
+                            let n = it.node;
+                            that.$set(n, 'selected', false);
+                        });
+                    }
+                    that.$set(node, 'selected', currentSelectVal);
+                    //今操作してるのツリーノードを外に通知
+                    that.$emit('onSelect', params);
+                }
             },
 
             _propagateUp(nodekey){
@@ -123,25 +142,27 @@
 
                 console.log('======');
                 console.log('nodekey', nodekey);
-                console.log('node',  that.flatTree[nodekey].node.title);
-                console.log('currentNode.checked',  that.flatTree[nodekey].node.checked);
+                console.log('node', that.flatTree[nodekey].node.title);
+                console.log('currentNode.checked', that.flatTree[nodekey].node.checked);
                 console.log('======');
 
                 const parentKey = that.flatTree[nodekey].parent;
-                if(parentKey === undefined) {return;}
+                if (parentKey === undefined) {
+                    return;
+                }
                 const currentNode = that.flatTree[nodekey].node;
                 const parentNode = that.flatTree[parentKey].node;
 
-                if(currentNode.checked == parentNode.checked && currentNode.indeterminated == parentNode.indeterminated){
+                if (currentNode.checked == parentNode.checked && currentNode.indeterminated == parentNode.indeterminated) {
                     return;
                 }
 
-                if(currentNode.checked){
+                if (currentNode.checked) {
                     let isAllChildrenChecked = true;
                     let allChildren = parentNode.children;
-                    for(let i = 0,len = allChildren.length;i<len;i++){
+                    for (let i = 0, len = allChildren.length; i < len; i++) {
                         let _child = allChildren[i];
-                        if(!_child.checked){
+                        if (!_child.checked) {
                             isAllChildrenChecked = false;
                             break;
                         }
@@ -152,7 +173,7 @@
                     that.$set(parentNode, 'indeterminated', !isAllChildrenChecked);
                     that.$set(parentNode, 'checked', isAllChildrenChecked);
 
-                }else{
+                } else {
                     let isChildenContainIndeterminated = false;
                     let isAllChildrenChecked = true;
 
@@ -161,20 +182,20 @@
                     let uncheckedCount = 0;
 
                     let jAllChildren = parentNode.children;
-                    for(let j = 0,jlen = jAllChildren.length;j<jlen;j++){
+                    for (let j = 0, jlen = jAllChildren.length; j < jlen; j++) {
                         console.log("cc_22");
                         let _jChild = jAllChildren[j];
 //                        if(_jChild.indeterminated){
 //                            isChildenContainIndeterminated = true;
 //                            break;
 //                        }
-                        if(!_jChild.checked && !_jChild.indeterminated){
+                        if (!_jChild.checked && !_jChild.indeterminated) {
                             uncheckedCount++;
                         }
                     }
                     console.log(uncheckedCount)
                     console.log(jAllChildren.length)
-                    if(uncheckedCount != jAllChildren.length){
+                    if (uncheckedCount != jAllChildren.length) {
                         isChildenContainUnchecked = true;
                     }
 
@@ -186,10 +207,10 @@
 
             },
 
-            _propagetaDown(node, params={}){
+            _propagetaDown(node, params = {}){
                 let that = this;
 
-                for(let i in params){
+                for (let i in params) {
                     that.$set(node, i, params[i]);
                 }
 //                debugger
@@ -197,7 +218,7 @@
 //                that.$set(node, 'indeterminated', false);
 
                 //TODO 重整这里 that.flatTree[child]
-                if(node && node.children && node.children.length){
+                if (node && node.children && node.children.length) {
                     node.children.forEach(child => {
 //                        that._propagetaDown({
 //                            nodeKey:
@@ -212,6 +233,7 @@
                 let that = this;
                 let keyCounter = 0;
                 const flatTree = [];
+
                 function flattenChildren(node, parent) {
                     node.nodeKey = keyCounter++;
                     flatTree[node.nodeKey] = {
@@ -228,6 +250,7 @@
                         node.children.forEach(child => flattenChildren(child, node));
                     }
                 }
+
                 that.treeAllData.forEach(rootNode => {
                     flattenChildren(rootNode);
                 });
