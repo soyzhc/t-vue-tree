@@ -1,16 +1,11 @@
-# 一个vue tree的npm组件包开发项目
+# 一个vue tree（同步树，没有异步树）的npm组件包开发项目
 
-## 目录
 
-```
-├── dist/           (编译后的、发布用的 )
-├── examples/        (使用示例)
-├── node_modules/   (运行包)
-├── src/            (开发用的目录 )
-├── test/            (单元测试)
-├── package.json  (项目描述)
-└── webpack.config.js （webpack配置）
-```
+## 说明：
+1.基于vue的同步树，且当前版本只有同步树，没有异步树。
+2.暂无
+
+##在线demo。基本上我做了几个基础的示例：
 
 ##使用方法：
 
@@ -18,9 +13,8 @@
 
     npm install t-vue-tree
 
-2.并在个人的vue项目中使用：
+2.在需要使用的vue页面中如此使用：
 
-你的
+    demo.vue:
 
 
-```

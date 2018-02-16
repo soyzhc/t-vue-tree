@@ -66,7 +66,6 @@
         watch: {
             data(val){
 
-//                this.rebuildTree();
             }
         },
 

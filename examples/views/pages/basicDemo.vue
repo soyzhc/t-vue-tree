@@ -1,31 +1,100 @@
-<style scoped lang="less">
-    /*@import "../../styles/common.less";*/
-</style>
-
 <template>
-    <div class="index">
-        <h2>t-vue-tree 文档</h2>
-        <h3>例子：</h3>
-        <div class="example-box" ref="containerNode">
+    <div class="main-content">
+        <h1>t-vue-tree</h1>
+        <h3 class="title-mark"> 一个基于vue的同步树 </h3>
+        <p>ps:当前版本没有做异步树</p>
+        <section class="inner-main-content">
+            <h3 class="title-mark">安装与引入方式：</h3>
+            <p>1.下载安装： npm install t-vue-tree </p>
+            <p>2.引入(即:注册该组件到vue的组件里):</p>
+            <ol>
+                <li>方式1：在个人的vue项目的主js里注册：
+                    import T_tree from 't-vue-tree';
+                    Vue.component('Ttree', Ttree);
 
-            <Ttree ref="demotree"
-                   :data="treeData"
-                   :treeSelectable="treeSelectable"
-                   :treeSelectType="treeSelectType"
-                   @onToggle="onToggleHandle"
-                   @onCheck="onCheckHandle"
-                   @onSelect="onSelectHandle"
-            ></Ttree>
+                    然后在每个单独的vue文件中就可以直接使用而不用再次注册了。
+                </li>
+                <li>方式2：在各个单独的vue文件引入并注册为一个局部的组件：
+                    <pre>
+                        <code>
+                             &lt;script>
+                                 import T_tree from 't-vue-tree';
+                                export default {
+                                    components: {
+                                        T_tree
+                                    }
+                                }
+                            &lt;/script>
+                        </code>
+                    </pre>
+                </li>
+            </ol>
+            <h3 class="title-mark">例子1_一个基础的例子</h3>
+            <div class="example-box" ref="containerNode">
+                <div class="top demo1-tree-wrapper">
+                    <Ttree ref="demotree"
+                           :data="treeData"
+                           :treeSelectable="treeSelectable"
+                           :treeSelectType="treeSelectType"
+                           @onToggle="onToggleHandle"
+                           @onCheck="onCheckHandle"
+                           @onSelect="onSelectHandle"
+                    ></Ttree>
+                </div>
+                <div class="bottom">
+                    <div class="control-part" @click="showHideCode(0)">
+                        {{examplesObj[0].bottomShow ? '隐藏代码' : '显示代码'}}
+                    </div>
+                    <div class="code-part" v-if="examplesObj[0].bottomShow">
+                        <pre>
+                            <code>
+&lt;style>
+.demo1-tree-wrapper{
+   width: 100%;
+   height: 180px;
+}
+&lt;/style>
 
-        </div>
+&lt;template>
+    <span class="high-light-yellow">&lt;div class="demo1-tree-wrapper">//注意：页面上一定要放一个你自己的dom容器，并设置其宽高，里面再放Ttree组件,因为tree组件的高度样式是父容器的高度的100%，内容过多时则出现滚动条。 </span>
+     &lt;Ttree ref="demotree"
+           :data="treeData"
+           @onToggle="onToggleHandle"
+           @onCheck="onCheckHandle"
+           @onSelect="onSelectHandle"
+    > &lt;/Ttree>
+    &lt;/div>
+&lt;template>
 
-        <div class="example-box">
-            <p class="example-title">方法示例：</p>
-            <button @click="getCheckedNodes('checked')">获取checked节点</button>
-            <button @click="getCheckedNodes('indeterminated')">获取 半勾选的节点</button>
-            <button @click="getSelectedNodes()">获取所有选中的节点</button>
+&lt;script>
+    import Ttree from 't-vue-tree';
 
-        </div>
+    export default {
+        components: {
+            Ttree
+        },
+        data(){
+            return {
+            }
+        }
+    }
+&lt;/script>
+
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="example-box">
+                <p class="example-title">方法示例：</p>
+                <button @click="getCheckedNodes('checked')">获取checked节点</button>
+                <button @click="getCheckedNodes('indeterminated')">获取 半勾选的节点</button>
+                <button @click="getSelectedNodes()">获取所有选中的节点</button>
+
+            </div>
+        </section>
     </div>
 </template>
 <script>
@@ -35,8 +104,14 @@
 //        },
         data(){
             return {
-                treeSelectable:true,//点击树节点时，是否有选中效果，默认true,
-                treeSelectType:"multiple",//点击树节点时的选中效果是单选还是多选,默认single
+                examplesObj: [
+                    {bottomShow: false},
+                    {bottomShow: false},
+                    {bottomShow: false},
+                    {bottomShow: false}
+                ],
+                treeSelectable: true,//点击树节点时，是否有选中效果，默认true,
+                treeSelectType: "multiple",//点击树节点时的选中效果是单选还是多选,默认single
                 treeData: [
                     {
                         title: 'parent 1',
@@ -187,6 +262,13 @@
                 let that = this;
                 let result = that.$refs.demotree.getSelectedNodes();
                 console.log(result);
+            },
+
+            showHideCode(idx){
+                let that = this;
+
+                let oldVal = that.examplesObj[idx].bottomShow;
+                that.$set(that.examplesObj[idx], 'bottomShow', !oldVal);
             }
         }
     }
