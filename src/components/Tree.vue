@@ -73,14 +73,16 @@
 
             getCheckedNodes(type){
                 let that = this;
-                console.log('getCheckedNodes in source/Ttree.vue', type);
                 return that.flatTree.filter(obj => obj.node[type]).map(obj => obj.node);
             },
 
             getSelectedNodes(){
                 let that = this;
-                console.log('getSelectedNodes in source/Ttree.vue');
-                return that.flatTree.filter(obj => obj.node['selected']).map(obj => obj.node);
+                let result = [];
+                if(that.treeSelectable){
+                    result = that.flatTree.filter(obj => obj.node['selected']).map(obj => obj.node);
+                }
+                return result;
             },
 
             _handleCheckbox(params){
@@ -90,7 +92,6 @@
                 let currentNodeKey = params.nodeKey;
 
                 const node = that.flatTree[currentNodeKey].node;
-                console.log(node);
 
                 that.$set(node, 'checked', currentCheckVal);
                 that.$set(node, 'indeterminated', false);
@@ -117,7 +118,6 @@
                 let currentNodeKey = params.nodeKey;
 
                 const node = that.flatTree[currentNodeKey].node;
-                console.log('_handleClickText', node);
 
                 /* 仅当树节点设置了 treeSelectable 且其值为true时，才有相关的select选中效果和onSelect事件 */
                 if(that.treeSelectable && (typeof that.treeSelectable === 'boolean')){
@@ -138,12 +138,6 @@
 
             _propagateUp(nodekey){
                 let that = this;
-
-                console.log('======');
-                console.log('nodekey', nodekey);
-                console.log('node', that.flatTree[nodekey].node.title);
-                console.log('currentNode.checked', that.flatTree[nodekey].node.checked);
-                console.log('======');
 
                 const parentKey = that.flatTree[nodekey].parent;
                 if (parentKey === undefined) {
@@ -167,8 +161,6 @@
                         }
                     }
 
-                    console.log(`选中节点为${currentNode.title},isAllChildrenChecked值为${isAllChildrenChecked}`);
-
                     that.$set(parentNode, 'indeterminated', !isAllChildrenChecked);
                     that.$set(parentNode, 'checked', isAllChildrenChecked);
 
@@ -182,7 +174,6 @@
 
                     let jAllChildren = parentNode.children;
                     for (let j = 0, jlen = jAllChildren.length; j < jlen; j++) {
-                        console.log("cc_22");
                         let _jChild = jAllChildren[j];
 //                        if(_jChild.indeterminated){
 //                            isChildenContainIndeterminated = true;
@@ -192,8 +183,6 @@
                             uncheckedCount++;
                         }
                     }
-                    console.log(uncheckedCount)
-                    console.log(jAllChildren.length)
                     if (uncheckedCount != jAllChildren.length) {
                         isChildenContainUnchecked = true;
                     }
@@ -212,25 +201,20 @@
                 for (let i in params) {
                     that.$set(node, i, params[i]);
                 }
-//                debugger
-//                that.$set(node, 'checked', params['checked']);
-//                that.$set(node, 'indeterminated', false);
 
                 //TODO 重整这里 that.flatTree[child]
                 if (node && node.children && node.children.length) {
                     node.children.forEach(child => {
-//                        that._propagetaDown({
-//                            nodeKey:
-//                        });
 
                         that._propagetaDown(child, params);
                     });
                 }
             },
 
-            generateFlatTree () { // so we have always a relation parent/children of each node
+            generateFlatTree () {
                 let that = this;
                 let keyCounter = 0;
+                let selectedNodeCount = 0;//seleted为true的节点的数量计数
                 const flatTree = [];
 
                 function flattenChildren(node, parent) {

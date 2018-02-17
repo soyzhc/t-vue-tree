@@ -111,7 +111,6 @@
                 let that = this;
                 let result = '';
 
-                debugger;
                 if (that.nodeSelectable && that.data.selected) {
                     result += 'text-selected';
                 }
@@ -144,9 +143,6 @@
                     that.$set(that.data, 'expanded', !that.data.expanded);
                     parent.$emit.apply(parent, ['handleToggle'].concat(that.data));
 
-                    //demo
-                    //this.dispatch('Tree', 'toggle-expand', this.data);
-
                 }
             },
 
@@ -160,7 +156,6 @@
                     parent && (name = parent.$options.name);
                 }
 
-                console.log('getParent(), name理应为Ttree,实际为', name);
                 return parent;
 
             },
@@ -180,10 +175,8 @@
 
         created(){
             let that = this;
-//            console.log(that.data, that.data.constructor);
 
             /* 设置所有节点的选中配置 --start-- */
-            console.log('node created', that.treeSelectable)
             if(typeof that.treeSelectable === 'boolean'){
                 that.nodeSelectable = that.treeSelectable;
                 if(that.treeSelectType !== 'multiple'){

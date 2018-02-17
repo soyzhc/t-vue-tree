@@ -4,31 +4,6 @@
         <h3 class="title-mark"> 一个基于vue的同步树 </h3>
         <p>ps:当前版本没有做异步树</p>
         <section class="inner-main-content">
-            <h3 class="title-mark">安装与引入方式：</h3>
-            <p>1.下载安装： npm install t-vue-tree </p>
-            <p>2.引入(即:注册该组件到vue的组件里):</p>
-            <ol>
-                <li>方式1：在个人的vue项目的主js里注册：
-                    import T_tree from 't-vue-tree';
-                    Vue.component('Ttree', Ttree);
-
-                    然后在每个单独的vue文件中就可以直接使用而不用再次注册了。
-                </li>
-                <li>方式2：在各个单独的vue文件引入并注册为一个局部的组件：
-                    <pre>
-                        <code>
-                             &lt;script>
-                                 import T_tree from 't-vue-tree';
-                                export default {
-                                    components: {
-                                        T_tree
-                                    }
-                                }
-                            &lt;/script>
-                        </code>
-                    </pre>
-                </li>
-            </ol>
             <h3 class="title-mark">例子1_一个基础的例子</h3>
             <div class="example-box" ref="containerNode">
                 <div class="top demo1-tree-wrapper">
@@ -87,11 +62,20 @@
 
             </div>
 
-            <div class="example-box">
-                <p class="example-title">方法示例：</p>
-                <button @click="getCheckedNodes('checked')">获取checked节点</button>
-                <button @click="getCheckedNodes('indeterminated')">获取 半勾选的节点</button>
-                <button @click="getSelectedNodes()">获取所有选中的节点</button>
+            <div class="example-box padding">
+                <p class="example-title">事件示例：</p>
+                <p>f12打开控制台，然后分别点击选中节点、取消选中节点，勾选和取消勾选框，展开折叠节点，看看控制台打印的结果</p>
+
+                <p class="example-title" style="margin:10px 0 0;">方法示例：</p>
+                <button class="btn btn-block" @click="getCheckedNodes('checked')">获取checked节点 getCheckedNodes('checked')</button>
+                <button class="btn btn-block" @click="getCheckedNodes('indeterminated')">获取 半勾选的节点 getCheckedNodes('indeterminated')</button>
+                <button class="btn btn-block" @click="getSelectedNodes()">获取所有选中的节点 getSelectedNodes()</button>
+
+                <p class="example-title">结果展示：</p>
+                <p>F12看控制台，点击每个按钮后得到的结果console.log了的，控制台更清晰</p>
+                <!--<div class="example-result-box">-->
+                    <!--{{examplesObj.resultStr}}-->
+                <!--</div>-->
 
             </div>
         </section>
@@ -99,19 +83,28 @@
 </template>
 <script>
     export default {
-//        components: {
-//            Ttree
-//        },
         data(){
             return {
                 examplesObj: [
-                    {bottomShow: false},
-                    {bottomShow: false},
-                    {bottomShow: false},
-                    {bottomShow: false}
+                    {
+                        bottomShow: false,
+                        resultStr: ''
+                    },
+                    {
+                        bottomShow: false,
+                        resultStr: ''
+                    },
+                    {
+                        bottomShow: false,
+                        resultStr: ''
+                    },
+                    {
+                        bottomShow: false,
+                        resultStr: ''
+                    }
                 ],
                 treeSelectable: true,//点击树节点时，是否有选中效果，默认true,
-                treeSelectType: "multiple",//点击树节点时的选中效果是单选还是多选,默认single
+                treeSelectType: "single",//点击树节点时的选中效果是单选还是多选,默认single
                 treeData: [
                     {
                         title: 'parent 1',
@@ -138,6 +131,7 @@
                                         title: 'leaf 1-1-2',
                                         checkbox: true,//是否有勾选框,默认false
                                         checked: false,//是否勾选该节点，默认false
+                                        selected:true,//是否选中该节点，默认false
                                         custormKey: 'ccdf',
                                     }
                                 ]
@@ -196,7 +190,7 @@
                                 checkbox: true,//是否有勾选框,默认false
                                 checked: true,//是否勾选该节点，默认false
                                 expanded: true,//是否展开该节点
-                                selected: true,//是否选中该节点，默认false
+                                selected: false,//是否选中该节点，默认false
                                 expandOnClickNode: false,//点击节点时也展开节点，需要expand属性同时为真，默认false
                                 children: [
                                     {
@@ -253,6 +247,7 @@
                 if (type === 'checked' || type === 'indeterminated') {
                     let result = that.$refs.demotree.getCheckedNodes(type);
                     console.log(result);
+                    that.$set(that.examplesObj, 'resultStr', result);
                 } else {
                     throw "传参值仅为'checked'或者'indeterminated'"
                 }
@@ -262,6 +257,7 @@
                 let that = this;
                 let result = that.$refs.demotree.getSelectedNodes();
                 console.log(result);
+                that.$set(that.examplesObj, 'resultStr', result);
             },
 
             showHideCode(idx){
