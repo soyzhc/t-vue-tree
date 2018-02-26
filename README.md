@@ -27,9 +27,9 @@
 	...
 	import Vue from 'vue'
 	...
-	<!-- 你的其他代码 --end-- 	-->	
+	<!-- 你的其他代码 --end-- -->	
 	
-	<!-- 引入本tree组件 --start-- 	-->	
+	<!-- 引入本tree组件 --start-- -->	
 	import Ttree from 't-vue-tree';
 	Vue.component('Ttree', Ttree);
 	<!-- 引入本tree组件 --end-- 	-->	

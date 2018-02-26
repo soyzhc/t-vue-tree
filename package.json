@@ -1,6 +1,6 @@
 {
 	"name": "t-vue-tree",
-	"version": "1.0.5",
+	"version": "1.0.7",
 	"description": "",
 	"main": "dist/Ttree.min.js",
 	"scripts": {
@@ -12,14 +12,14 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/hamuPP/npmStudy.git"
+		"url": "git+https://github.com/hamuPP/t-vue-tree.git"
 	},
 	"author": "",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/hamuPP/npmStudy/issues"
+		"url": "https://github.com/hamuPP/t-vue-tree/issues"
 	},
-	"homepage": "https://github.com/hamuPP/npmStudy#readme",
+	"homepage": "https://github.com/hamuPP/t-vue-tree#readme",
 	"devDependencies": {
 		"babel-core": "^6.26.0",
 		"babel-loader": "^7.1.2",
