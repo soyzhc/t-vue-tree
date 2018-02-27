@@ -5,11 +5,11 @@
 1.基于vue的同步树，且当前版本只有同步树，没有异步树。
 
 
-##在线demo。基本上我做了几个基础的示例：
+## 在线demo。基本上我做了几个基础的示例：
 
 [https://hamupp.github.io/t-vue-tree/examples/#/basicDemoAndApi](https://hamupp.github.io/t-vue-tree/examples/#/basicDemoAndApi)
 
-##使用方法：
+## 使用方法：
 
 1.下载npm包:
 
@@ -131,7 +131,7 @@
 **注意：**
 不论哪种方式引入，在vue页面中使用时，一定要把本组件放在一个你的包裹dom元素中，例如上例中的.your-tree-wrapper的div。因为本tree的宽高css是100%,所以，如果父容器没有宽高。。。。你懂得撒。。。
 
-##属性
+## 属性
 1.data 类型Object 树的全部数据，格式参考示例中的，其中的各个字段的说明也看示例中的注释。在此基础上你当然可以追加自己的字段
 
 2.treeSelectable 类型Boolean 树节点是否有选中效果。默认true
@@ -145,9 +145,11 @@
 
 2.关于勾选框的，没有通用的勾选框属性配置。如果要加勾选框，请将每个节点的内部的checkbox字段设为true，否则该节点没有勾选框
 
-##事件
+## 事件
 1.onToggle 折叠展开一个节点时触发。返回该节点的所有数据
+
 2.onCheck 勾选|取消勾选一个节点时触发。返回该节点的所有数据
+
 3.onSelect 选择|取消选中一个节点时触发。返回该节点的所有数据
 
 ##方法

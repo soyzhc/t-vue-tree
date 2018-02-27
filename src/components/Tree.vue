@@ -65,7 +65,11 @@
 
         watch: {
             data(val){
+                let that = this;
 
+                //when tree data changed ,rebuild data for displaying in tree
+                that.treeAllData = val;
+                that.flatTree = that.generateFlatTree();
             }
         },
 
@@ -248,8 +252,8 @@
 
         created(){
             let that = this;
-            that.treeAllData = that.data;
 
+            that.treeAllData = that.data;
             that.flatTree = that.generateFlatTree();
         },
 

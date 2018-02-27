@@ -10,10 +10,8 @@ module.exports = {
     devtool: 'source-map',
     entry: "./examples/main",
     output: {
-        // path: path.resolve(__dirname, '../examples/dist'),
         path: path.join(__dirname, '../examples/dist'),
         publicPath: '',
-        // filename: 'Ttree.min.js',
         filename: '[name].js',
     },
     module: {
