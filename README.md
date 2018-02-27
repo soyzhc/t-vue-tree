@@ -152,7 +152,7 @@
 
 3.onSelect 选择|取消选中一个节点时触发。返回该节点的所有数据
 
-##方法
+## 方法
 
 1.getCheckedNodes 参数：String 仅限两个值：checked indeterminated 获取勾选的节点，实心和非实心。返回：Array，勾选的实心或者半实心的节点的集合
 
