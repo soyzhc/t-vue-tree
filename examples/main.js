@@ -27,7 +27,6 @@ const RouterConfig = {
 const router = new VueRouter(RouterConfig);
 
 new Vue({
-    // el: '#appExample',
     el: '#appExample',
     router: router,
     store,
