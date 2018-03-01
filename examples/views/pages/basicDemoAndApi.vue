@@ -107,7 +107,7 @@
                 treeSelectType: "single",//点击树节点时的选中效果是单选还是多选,默认single
                 treeData: [
                     {
-                        title: 'parent 1',
+                        title: 'parent 1-new2',
                         expanded: true,
                         checkbox: true,//是否有勾选框,默认false
                         checked: false,//是否勾选该节点，默认false
@@ -123,12 +123,14 @@
                                 children: [
                                     {
                                         title: 'leaf 1-1-1',
+                                        expanded:true,
                                         checkbox: true,//是否有勾选框,默认false
                                         checked: false,//是否勾选该节点，默认false
                                         custormKey: 'ccdf',
                                     },
                                     {
                                         title: 'leaf 1-1-2',
+                                        expanded:true,
                                         checkbox: true,//是否有勾选框,默认false
                                         checked: false,//是否勾选该节点，默认false
                                         selected:true,//是否选中该节点，默认false
@@ -145,24 +147,28 @@
                                 children: [
                                     {
                                         title: 'leaf 1-2-1',
+                                        expanded: true,
                                         checkbox: true,//是否有勾选框,默认false
                                         checked: false,//是否勾选该节点，默认false
                                         custormKey: 'ccdf',
                                         children: [
                                             {
                                                 title: 'leaf 1-2-1-1',
+                                                expanded: true,
                                                 checkbox: true,//是否有勾选框,默认false
                                                 checked: false,//是否勾选该节点，默认false
                                                 custormKey: 'mmccf',
                                             },
                                             {
                                                 title: 'leaf 1-2-1-2',
+                                                expanded: true,
                                                 checkbox: true,//是否有勾选框,默认false
                                                 checked: false,//是否勾选该节点，默认false
                                                 custormKey: 'mmccf',
                                             },
                                             {
                                                 title: 'leaf 1-2-1-3',
+                                                expanded: true,
                                                 checkbox: true,//是否有勾选框,默认false
                                                 checked: false,//是否勾选该节点，默认false
                                                 custormKey: 'mmccf',
@@ -171,6 +177,7 @@
                                     },
                                     {
                                         title: 'leaf 1-2-1',
+                                        expanded: true,
                                         checkbox: true,//是否有勾选框,默认false
                                         checked: false,//是否勾选该节点，默认false
                                         custormKey: 'ccdf',
@@ -180,8 +187,8 @@
                         ]
                     },
                     {
-                        title: 'parent 2',
-                        expanded: false,
+                        title: 'parent 2-new',
+                        expanded: true,
                         checkbox: true,//是否有勾选框,默认false
                         checked: true,//是否勾选该节点，默认false
                         children: [
@@ -195,11 +202,13 @@
                                 children: [
                                     {
                                         title: 'leaf 2-1-1',
+                                        expanded: true,
                                         checkbox: true,//是否有勾选框,默认false
                                         checked: true,//是否勾选该节点，默认false
                                     },
                                     {
                                         title: 'leaf 2-1-2',
+                                        expanded: true,
                                         checkbox: true,//是否有勾选框,默认false
                                         checked: true,//是否勾选该节点，默认false
                                     }
@@ -213,11 +222,13 @@
                                 children: [
                                     {
                                         title: 'leaf 2-2-1',
+                                        expanded: true,
                                         checkbox: true,//是否有勾选框,默认false
                                         checked: true,//是否勾选该节点，默认false
                                     },
                                     {
                                         title: 'leaf 2-2-1',
+                                        expanded: true,
                                         checkbox: true,//是否有勾选框,默认false
                                         checked: true,//是否勾选该节点，默认false
                                     }
