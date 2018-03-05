@@ -8,8 +8,7 @@
 <template>
     <compoTransition>
         <ul class="TtreeNode-wrapper"
-            :class="computedNodeWrapperCls"
-            :style="computedNodeWrapperStyles">
+            :class="computedNodeWrapperCls">
             <li>
            <span class="icon-wrapper">
                <span v-if="data.children && data.children.length" @click="handleExpand"></span>
@@ -90,8 +89,9 @@
 
             computedNodeWrapperStyles(){
                 let that = this;
-                let result = '';
+                let result = 'height:auto !important;overflow:auto !important;background:green;';
 
+//                let result = '';
                 return result;
             },
             computedCheckBoxCls(){

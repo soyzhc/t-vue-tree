@@ -108,7 +108,7 @@
                 treeData: [
                     {
                         title: 'parent 1-new2',
-                        expanded: true,
+                        expanded: false,
                         checkbox: true,//是否有勾选框,默认false
                         checked: false,//是否勾选该节点，默认false
                         selected: false,//是否选中该节点，默认false
@@ -216,7 +216,7 @@
                             },
                             {
                                 title: 'parent 2-2',
-                                expanded: true,
+                                expanded: false,
                                 checkbox: true,//是否有勾选框,默认false
                                 checked: true,//是否勾选该节点，默认false
                                 children: [
@@ -225,13 +225,13 @@
                                         expanded: true,
                                         checkbox: true,//是否有勾选框,默认false
                                         checked: true,//是否勾选该节点，默认false
-                                    },
-                                    {
-                                        title: 'leaf 2-2-1',
-                                        expanded: true,
-                                        checkbox: true,//是否有勾选框,默认false
-                                        checked: true,//是否勾选该节点，默认false
                                     }
+//                                    {
+//                                        title: 'leaf 2-2-1',
+//                                        expanded: true,
+//                                        checkbox: true,//是否有勾选框,默认false
+//                                        checked: true,//是否勾选该节点，默认false
+//                                    }
                                 ]
                             }
                         ]

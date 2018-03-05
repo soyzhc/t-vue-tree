@@ -12209,7 +12209,7 @@ exports.default = {
             treeSelectType: "single", //点击树节点时的选中效果是单选还是多选,默认single
             treeData: [{
                 title: 'parent 1-new2',
-                expanded: true,
+                expanded: false,
                 checkbox: true, //是否有勾选框,默认false
                 checked: false, //是否勾选该节点，默认false
                 selected: false, //是否选中该节点，默认false
@@ -12298,7 +12298,7 @@ exports.default = {
                     }]
                 }, {
                     title: 'parent 2-2',
-                    expanded: true,
+                    expanded: false,
                     checkbox: true, //是否有勾选框,默认false
                     checked: true, //是否勾选该节点，默认false
                     children: [{
@@ -12306,11 +12306,13 @@ exports.default = {
                         expanded: true,
                         checkbox: true, //是否有勾选框,默认false
                         checked: true //是否勾选该节点，默认false
-                    }, {
-                        title: 'leaf 2-2-1',
-                        expanded: true,
-                        checkbox: true, //是否有勾选框,默认false
-                        checked: true //是否勾选该节点，默认false
+
+                        //                                    {
+                        //                                        title: 'leaf 2-2-1',
+                        //                                        expanded: true,
+                        //                                        checkbox: true,//是否有勾选框,默认false
+                        //                                        checked: true,//是否勾选该节点，默认false
+                        //                                    }
                     }]
                 }]
             }]
@@ -16167,8 +16169,9 @@ exports.default = {
         },
         computedNodeWrapperStyles: function computedNodeWrapperStyles() {
             var that = this;
-            var result = '';
+            var result = 'height:auto !important;overflow:auto !important;background:green;';
 
+            //                let result = '';
             return result;
         },
         computedCheckBoxCls: function computedCheckBoxCls() {
@@ -16255,7 +16258,6 @@ exports.default = {
         /* 设置所有节点的选中配置 --end-- */
     }
 }; //
-//
 //
 //
 //
@@ -25771,7 +25773,7 @@ exports = module.exports = __webpack_require__(97)(true);
 
 
 // module
-exports.push([module.i, "\n.Ttree-wrapper .TtreeNode-wrapper[data-v-18eb56f0] {\n  display: block;\n  /* 伸缩展开的动画 --start--*/\n  /* 伸缩展开的动画 --end--*/\n}\n.Ttree-wrapper .TtreeNode-wrapper ul[data-v-18eb56f0] {\n  display: block;\n  list-style: none;\n  margin: 0;\n  padding: 0;\n  font-size: 14px;\n}\n.Ttree-wrapper .TtreeNode-wrapper li[data-v-18eb56f0] {\n  line-height: 22px;\n  font-size: 14px;\n}\n.Ttree-wrapper .TtreeNode-wrapper li ul[data-v-18eb56f0] {\n  padding: 0 0 0 18px;\n}\n.Ttree-wrapper .TtreeNode-wrapper .icon-wrapper[data-v-18eb56f0] {\n  width: 12px;\n  height: 12px;\n  margin: 8px 6px 0 6px;\n  display: block;\n  float: left;\n}\n.Ttree-wrapper .TtreeNode-wrapper .icon-wrapper > span[data-v-18eb56f0] {\n  display: block;\n  border: 6px solid #49505f;\n  border-color: #49505f transparent transparent;\n  cursor: pointer;\n  transition: all .2s;\n  -webkit-transform-origin: 50% 25%;\n  -moz-transform-origin: 50% 25%;\n  -ms-transform-origin: 50% 25%;\n  -o-transform-origin: 50% 25%;\n  transform-origin: 50% 25%;\n}\n.Ttree-wrapper .TtreeNode-wrapper .checkbox-wrapper[data-v-18eb56f0] {\n  position: relative;\n  display: inline-block;\n}\n.Ttree-wrapper .TtreeNode-wrapper .checkbox-wrapper .checkbox-inner[data-v-18eb56f0] {\n  position: relative;\n  display: inline-block;\n  width: 14px;\n  height: 14px;\n  border: 1px solid #dddee1;\n  border-radius: 2px;\n  background-color: #fff;\n  transition: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;\n  vertical-align: middle;\n}\n.Ttree-wrapper .TtreeNode-wrapper .checkbox-wrapper .checkbox-inner[data-v-18eb56f0]:after {\n  content: \"\";\n  display: table;\n  width: 3px;\n  height: 8px;\n  position: absolute;\n  top: 1px;\n  left: 4px;\n  border: 2px solid #fff;\n  border-top: 0;\n  border-left: 0;\n  transform: rotate(45deg) scale(1);\n  transition: all 0.2s ease-in-out;\n}\n.Ttree-wrapper .TtreeNode-wrapper .checkbox-wrapper .checkbox-checkbox[data-v-18eb56f0] {\n  position: absolute;\n  z-index: 1;\n  left: 0;\n  top: 5px;\n  width: 14px;\n  height: 14px;\n  cursor: pointer;\n  opacity: 0;\n}\n.Ttree-wrapper .TtreeNode-wrapper .checkbox-wrapper.checked .checkbox-inner[data-v-18eb56f0] {\n  background-color: #2d8cf0;\n  border-color: #2d8cf0;\n}\n.Ttree-wrapper .TtreeNode-wrapper .checkbox-wrapper.indeterminated .checkbox-inner[data-v-18eb56f0] {\n  background-color: #2d8cf0;\n  border-color: #2d8cf0;\n}\n.Ttree-wrapper .TtreeNode-wrapper .checkbox-wrapper.indeterminated .checkbox-inner[data-v-18eb56f0]:after {\n  content: \"\";\n  width: 7px;\n  height: 0;\n  position: absolute;\n  top: 5px;\n  left: 2px;\n  transform: scale(1);\n  transition: all 0.2s ease-in-out;\n}\n.Ttree-wrapper .TtreeNode-wrapper .text-wrapper[data-v-18eb56f0] {\n  display: inline-block;\n}\n.Ttree-wrapper .TtreeNode-wrapper .text-wrapper[data-v-18eb56f0]:hover {\n  background: #eaf4fe;\n}\n.Ttree-wrapper .TtreeNode-wrapper .text-wrapper.text-selected[data-v-18eb56f0] {\n  background: #ced7e0;\n}\n.Ttree-wrapper .TtreeNode-wrapper.transition[data-v-18eb56f0] {\n  transition: all .2s;\n}\n.Ttree-wrapper .TtreeNode-wrapper.collapsed .icon-wrapper > span[data-v-18eb56f0] {\n  transition: all .2s;\n  transform: rotate(-90deg);\n}\n", "", {"version":3,"sources":["/Users/ty/wbPro/personalAll/npm-T-vue-tree/src/components/TreeNode.vue"],"names":[],"mappings":";AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;CACrB;AACD;EACE,eAAe;EACf,iBAAiB;EACjB,UAAU;EACV,WAAW;EACX,gBAAgB;CACjB;AACD;EACE,kBAAkB;EAClB,gBAAgB;CACjB;AACD;EACE,oBAAoB;CACrB;AACD;EACE,YAAY;EACZ,aAAa;EACb,sBAAsB;EACtB,eAAe;EACf,YAAY;CACb;AACD;EACE,eAAe;EACf,0BAA0B;EAC1B,8CAA8C;EAC9C,gBAAgB;EAChB,oBAAoB;EACpB,kCAAkC;EAClC,+BAA+B;EAC/B,8BAA8B;EAC9B,6BAA6B;EAC7B,0BAA0B;CAC3B;AACD;EACE,mBAAmB;EACnB,sBAAsB;CACvB;AACD;EACE,mBAAmB;EACnB,sBAAsB;EACtB,YAAY;EACZ,aAAa;EACb,0BAA0B;EAC1B,mBAAmB;EACnB,uBAAuB;EACvB,0GAA0G;EAC1G,uBAAuB;CACxB;AACD;EACE,YAAY;EACZ,eAAe;EACf,WAAW;EACX,YAAY;EACZ,mBAAmB;EACnB,SAAS;EACT,UAAU;EACV,uBAAuB;EACvB,cAAc;EACd,eAAe;EACf,kCAAkC;EAClC,iCAAiC;CAClC;AACD;EACE,mBAAmB;EACnB,WAAW;EACX,QAAQ;EACR,SAAS;EACT,YAAY;EACZ,aAAa;EACb,gBAAgB;EAChB,WAAW;CACZ;AACD;EACE,0BAA0B;EAC1B,sBAAsB;CACvB;AACD;EACE,0BAA0B;EAC1B,sBAAsB;CACvB;AACD;EACE,YAAY;EACZ,WAAW;EACX,UAAU;EACV,mBAAmB;EACnB,SAAS;EACT,UAAU;EACV,oBAAoB;EACpB,iCAAiC;CAClC;AACD;EACE,sBAAsB;CACvB;AACD;EACE,oBAAoB;CACrB;AACD;EACE,oBAAoB;CACrB;AACD;EACE,oBAAoB;CACrB;AACD;EACE,oBAAoB;EACpB,0BAA0B;CAC3B","file":"TreeNode.vue","sourcesContent":[".Ttree-wrapper .TtreeNode-wrapper {\n  display: block;\n  /* 伸缩展开的动画 --start--*/\n  /* 伸缩展开的动画 --end--*/\n}\n.Ttree-wrapper .TtreeNode-wrapper ul {\n  display: block;\n  list-style: none;\n  margin: 0;\n  padding: 0;\n  font-size: 14px;\n}\n.Ttree-wrapper .TtreeNode-wrapper li {\n  line-height: 22px;\n  font-size: 14px;\n}\n.Ttree-wrapper .TtreeNode-wrapper li ul {\n  padding: 0 0 0 18px;\n}\n.Ttree-wrapper .TtreeNode-wrapper .icon-wrapper {\n  width: 12px;\n  height: 12px;\n  margin: 8px 6px 0 6px;\n  display: block;\n  float: left;\n}\n.Ttree-wrapper .TtreeNode-wrapper .icon-wrapper > span {\n  display: block;\n  border: 6px solid #49505f;\n  border-color: #49505f transparent transparent;\n  cursor: pointer;\n  transition: all .2s;\n  -webkit-transform-origin: 50% 25%;\n  -moz-transform-origin: 50% 25%;\n  -ms-transform-origin: 50% 25%;\n  -o-transform-origin: 50% 25%;\n  transform-origin: 50% 25%;\n}\n.Ttree-wrapper .TtreeNode-wrapper .checkbox-wrapper {\n  position: relative;\n  display: inline-block;\n}\n.Ttree-wrapper .TtreeNode-wrapper .checkbox-wrapper .checkbox-inner {\n  position: relative;\n  display: inline-block;\n  width: 14px;\n  height: 14px;\n  border: 1px solid #dddee1;\n  border-radius: 2px;\n  background-color: #fff;\n  transition: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;\n  vertical-align: middle;\n}\n.Ttree-wrapper .TtreeNode-wrapper .checkbox-wrapper .checkbox-inner:after {\n  content: \"\";\n  display: table;\n  width: 3px;\n  height: 8px;\n  position: absolute;\n  top: 1px;\n  left: 4px;\n  border: 2px solid #fff;\n  border-top: 0;\n  border-left: 0;\n  transform: rotate(45deg) scale(1);\n  transition: all 0.2s ease-in-out;\n}\n.Ttree-wrapper .TtreeNode-wrapper .checkbox-wrapper .checkbox-checkbox {\n  position: absolute;\n  z-index: 1;\n  left: 0;\n  top: 5px;\n  width: 14px;\n  height: 14px;\n  cursor: pointer;\n  opacity: 0;\n}\n.Ttree-wrapper .TtreeNode-wrapper .checkbox-wrapper.checked .checkbox-inner {\n  background-color: #2d8cf0;\n  border-color: #2d8cf0;\n}\n.Ttree-wrapper .TtreeNode-wrapper .checkbox-wrapper.indeterminated .checkbox-inner {\n  background-color: #2d8cf0;\n  border-color: #2d8cf0;\n}\n.Ttree-wrapper .TtreeNode-wrapper .checkbox-wrapper.indeterminated .checkbox-inner:after {\n  content: \"\";\n  width: 7px;\n  height: 0;\n  position: absolute;\n  top: 5px;\n  left: 2px;\n  transform: scale(1);\n  transition: all 0.2s ease-in-out;\n}\n.Ttree-wrapper .TtreeNode-wrapper .text-wrapper {\n  display: inline-block;\n}\n.Ttree-wrapper .TtreeNode-wrapper .text-wrapper:hover {\n  background: #eaf4fe;\n}\n.Ttree-wrapper .TtreeNode-wrapper .text-wrapper.text-selected {\n  background: #ced7e0;\n}\n.Ttree-wrapper .TtreeNode-wrapper.transition {\n  transition: all .2s;\n}\n.Ttree-wrapper .TtreeNode-wrapper.collapsed .icon-wrapper > span {\n  transition: all .2s;\n  transform: rotate(-90deg);\n}\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.Ttree-wrapper .TtreeNode-wrapper[data-v-18eb56f0] {\n  display: block;\n  /* 伸缩展开的动画 --start--*/\n  /* 伸缩展开的动画 --end--*/\n}\n.Ttree-wrapper .TtreeNode-wrapper ul[data-v-18eb56f0] {\n  display: block;\n  list-style: none;\n  margin: 0;\n  padding: 0;\n  font-size: 14px;\n}\n.Ttree-wrapper .TtreeNode-wrapper li[data-v-18eb56f0] {\n  vertical-align: bottom;\n  line-height: 22px;\n  font-size: 14px;\n}\n.Ttree-wrapper .TtreeNode-wrapper li ul[data-v-18eb56f0] {\n  padding: 0 0 0 18px;\n}\n.Ttree-wrapper .TtreeNode-wrapper .icon-wrapper[data-v-18eb56f0] {\n  width: 12px;\n  height: 12px;\n  margin: 8px 6px 0 6px;\n  display: block;\n  float: left;\n}\n.Ttree-wrapper .TtreeNode-wrapper .icon-wrapper > span[data-v-18eb56f0] {\n  display: block;\n  border: 6px solid #49505f;\n  border-color: #49505f transparent transparent;\n  cursor: pointer;\n  transition: all .2s;\n  -webkit-transform-origin: 50% 25%;\n  -moz-transform-origin: 50% 25%;\n  -ms-transform-origin: 50% 25%;\n  -o-transform-origin: 50% 25%;\n  transform-origin: 50% 25%;\n}\n.Ttree-wrapper .TtreeNode-wrapper .checkbox-wrapper[data-v-18eb56f0] {\n  position: relative;\n  display: inline-block;\n}\n.Ttree-wrapper .TtreeNode-wrapper .checkbox-wrapper .checkbox-inner[data-v-18eb56f0] {\n  position: relative;\n  display: inline-block;\n  width: 14px;\n  height: 14px;\n  border: 1px solid #dddee1;\n  border-radius: 2px;\n  background-color: #fff;\n  transition: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;\n  vertical-align: middle;\n}\n.Ttree-wrapper .TtreeNode-wrapper .checkbox-wrapper .checkbox-inner[data-v-18eb56f0]:after {\n  content: \"\";\n  display: table;\n  width: 3px;\n  height: 8px;\n  position: absolute;\n  top: 1px;\n  left: 4px;\n  border: 2px solid #fff;\n  border-top: 0;\n  border-left: 0;\n  -ms-transform: rotate(45deg) scale(1);\n  -ms-filter: \"progid:DXImageTransform.Microsoft.Matrix(M11=0.7071067811865474, M12=-0.7071067811865477, M21=0.7071067811865477, M22=0.7071067811865474, SizingMethod='auto expand')\";\n  transform: rotate(45deg) scale(1);\n  transition: all 0.2s ease-in-out;\n}\n.Ttree-wrapper .TtreeNode-wrapper .checkbox-wrapper .checkbox-checkbox[data-v-18eb56f0] {\n  position: absolute;\n  z-index: 1;\n  left: 0;\n  top: 5px;\n  width: 14px;\n  height: 14px;\n  cursor: pointer;\n  opacity: 0;\n}\n.Ttree-wrapper .TtreeNode-wrapper .checkbox-wrapper.checked .checkbox-inner[data-v-18eb56f0] {\n  background-color: #2d8cf0;\n  border-color: #2d8cf0;\n}\n.Ttree-wrapper .TtreeNode-wrapper .checkbox-wrapper.indeterminated .checkbox-inner[data-v-18eb56f0] {\n  background-color: #2d8cf0;\n  border-color: #2d8cf0;\n}\n.Ttree-wrapper .TtreeNode-wrapper .checkbox-wrapper.indeterminated .checkbox-inner[data-v-18eb56f0]:after {\n  content: \"\";\n  width: 7px;\n  height: 0;\n  position: absolute;\n  top: 5px;\n  left: 2px;\n  -ms-transform: scale(1);\n  transform: scale(1);\n  transition: all 0.2s ease-in-out;\n}\n.Ttree-wrapper .TtreeNode-wrapper .text-wrapper[data-v-18eb56f0] {\n  display: inline-block;\n}\n.Ttree-wrapper .TtreeNode-wrapper .text-wrapper[data-v-18eb56f0]:hover {\n  background: #eaf4fe;\n}\n.Ttree-wrapper .TtreeNode-wrapper .text-wrapper.text-selected[data-v-18eb56f0] {\n  background: #ced7e0;\n}\n.Ttree-wrapper .TtreeNode-wrapper.transition[data-v-18eb56f0] {\n  transition: all .2s;\n}\n.Ttree-wrapper .TtreeNode-wrapper.collapsed .icon-wrapper > span[data-v-18eb56f0] {\n  transition: all .2s;\n  -ms-transform: rotate(-90deg);\n  transform: rotate(-90deg);\n}\n", "", {"version":3,"sources":["/Users/ty/wbPro/personalAll/npm-T-vue-tree/src/components/TreeNode.vue"],"names":[],"mappings":";AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;CACrB;AACD;EACE,eAAe;EACf,iBAAiB;EACjB,UAAU;EACV,WAAW;EACX,gBAAgB;CACjB;AACD;EACE,uBAAuB;EACvB,kBAAkB;EAClB,gBAAgB;CACjB;AACD;EACE,oBAAoB;CACrB;AACD;EACE,YAAY;EACZ,aAAa;EACb,sBAAsB;EACtB,eAAe;EACf,YAAY;CACb;AACD;EACE,eAAe;EACf,0BAA0B;EAC1B,8CAA8C;EAC9C,gBAAgB;EAChB,oBAAoB;EACpB,kCAAkC;EAClC,+BAA+B;EAC/B,8BAA8B;EAC9B,6BAA6B;EAC7B,0BAA0B;CAC3B;AACD;EACE,mBAAmB;EACnB,sBAAsB;CACvB;AACD;EACE,mBAAmB;EACnB,sBAAsB;EACtB,YAAY;EACZ,aAAa;EACb,0BAA0B;EAC1B,mBAAmB;EACnB,uBAAuB;EACvB,0GAA0G;EAC1G,uBAAuB;CACxB;AACD;EACE,YAAY;EACZ,eAAe;EACf,WAAW;EACX,YAAY;EACZ,mBAAmB;EACnB,SAAS;EACT,UAAU;EACV,uBAAuB;EACvB,cAAc;EACd,eAAe;EACf,sCAAsC;EACtC,oLAAoL;EACpL,kCAAkC;EAClC,iCAAiC;CAClC;AACD;EACE,mBAAmB;EACnB,WAAW;EACX,QAAQ;EACR,SAAS;EACT,YAAY;EACZ,aAAa;EACb,gBAAgB;EAChB,WAAW;CACZ;AACD;EACE,0BAA0B;EAC1B,sBAAsB;CACvB;AACD;EACE,0BAA0B;EAC1B,sBAAsB;CACvB;AACD;EACE,YAAY;EACZ,WAAW;EACX,UAAU;EACV,mBAAmB;EACnB,SAAS;EACT,UAAU;EACV,wBAAwB;EACxB,oBAAoB;EACpB,iCAAiC;CAClC;AACD;EACE,sBAAsB;CACvB;AACD;EACE,oBAAoB;CACrB;AACD;EACE,oBAAoB;CACrB;AACD;EACE,oBAAoB;CACrB;AACD;EACE,oBAAoB;EACpB,8BAA8B;EAC9B,0BAA0B;CAC3B","file":"TreeNode.vue","sourcesContent":[".Ttree-wrapper .TtreeNode-wrapper {\n  display: block;\n  /* 伸缩展开的动画 --start--*/\n  /* 伸缩展开的动画 --end--*/\n}\n.Ttree-wrapper .TtreeNode-wrapper ul {\n  display: block;\n  list-style: none;\n  margin: 0;\n  padding: 0;\n  font-size: 14px;\n}\n.Ttree-wrapper .TtreeNode-wrapper li {\n  vertical-align: bottom;\n  line-height: 22px;\n  font-size: 14px;\n}\n.Ttree-wrapper .TtreeNode-wrapper li ul {\n  padding: 0 0 0 18px;\n}\n.Ttree-wrapper .TtreeNode-wrapper .icon-wrapper {\n  width: 12px;\n  height: 12px;\n  margin: 8px 6px 0 6px;\n  display: block;\n  float: left;\n}\n.Ttree-wrapper .TtreeNode-wrapper .icon-wrapper > span {\n  display: block;\n  border: 6px solid #49505f;\n  border-color: #49505f transparent transparent;\n  cursor: pointer;\n  transition: all .2s;\n  -webkit-transform-origin: 50% 25%;\n  -moz-transform-origin: 50% 25%;\n  -ms-transform-origin: 50% 25%;\n  -o-transform-origin: 50% 25%;\n  transform-origin: 50% 25%;\n}\n.Ttree-wrapper .TtreeNode-wrapper .checkbox-wrapper {\n  position: relative;\n  display: inline-block;\n}\n.Ttree-wrapper .TtreeNode-wrapper .checkbox-wrapper .checkbox-inner {\n  position: relative;\n  display: inline-block;\n  width: 14px;\n  height: 14px;\n  border: 1px solid #dddee1;\n  border-radius: 2px;\n  background-color: #fff;\n  transition: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;\n  vertical-align: middle;\n}\n.Ttree-wrapper .TtreeNode-wrapper .checkbox-wrapper .checkbox-inner:after {\n  content: \"\";\n  display: table;\n  width: 3px;\n  height: 8px;\n  position: absolute;\n  top: 1px;\n  left: 4px;\n  border: 2px solid #fff;\n  border-top: 0;\n  border-left: 0;\n  -ms-transform: rotate(45deg) scale(1);\n  -ms-filter: \"progid:DXImageTransform.Microsoft.Matrix(M11=0.7071067811865474, M12=-0.7071067811865477, M21=0.7071067811865477, M22=0.7071067811865474, SizingMethod='auto expand')\";\n  transform: rotate(45deg) scale(1);\n  transition: all 0.2s ease-in-out;\n}\n.Ttree-wrapper .TtreeNode-wrapper .checkbox-wrapper .checkbox-checkbox {\n  position: absolute;\n  z-index: 1;\n  left: 0;\n  top: 5px;\n  width: 14px;\n  height: 14px;\n  cursor: pointer;\n  opacity: 0;\n}\n.Ttree-wrapper .TtreeNode-wrapper .checkbox-wrapper.checked .checkbox-inner {\n  background-color: #2d8cf0;\n  border-color: #2d8cf0;\n}\n.Ttree-wrapper .TtreeNode-wrapper .checkbox-wrapper.indeterminated .checkbox-inner {\n  background-color: #2d8cf0;\n  border-color: #2d8cf0;\n}\n.Ttree-wrapper .TtreeNode-wrapper .checkbox-wrapper.indeterminated .checkbox-inner:after {\n  content: \"\";\n  width: 7px;\n  height: 0;\n  position: absolute;\n  top: 5px;\n  left: 2px;\n  -ms-transform: scale(1);\n  transform: scale(1);\n  transition: all 0.2s ease-in-out;\n}\n.Ttree-wrapper .TtreeNode-wrapper .text-wrapper {\n  display: inline-block;\n}\n.Ttree-wrapper .TtreeNode-wrapper .text-wrapper:hover {\n  background: #eaf4fe;\n}\n.Ttree-wrapper .TtreeNode-wrapper .text-wrapper.text-selected {\n  background: #ced7e0;\n}\n.Ttree-wrapper .TtreeNode-wrapper.transition {\n  transition: all .2s;\n}\n.Ttree-wrapper .TtreeNode-wrapper.collapsed .icon-wrapper > span {\n  transition: all .2s;\n  -ms-transform: rotate(-90deg);\n  transform: rotate(-90deg);\n}\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -25798,14 +25800,34 @@ var TransitionObj = {
     beforeEnter: function beforeEnter(el) {
         UTILS.addCls(el, 'transition');
         el.style.height = '0';
+        el.style.background = 'pink';
     },
     enter: function enter(el) {
-        el.style.height = el.scrollHeight !== 0 ? el.scrollHeight + 'px' : '';
-        el.style.overflow = 'hidden';
+        /* 如果是ie9,调换enter和afterenter的顺序，*/
+        var ieVersion = UTILS.getIeVersion(); //false-非ie,否则则是 MSIE 9.0
+        if (ieVersion == 'MSIE 9.0') {
+
+            UTILS.removeCls(el, 'transition');
+            el.style.height = '';
+            el.style.background = 'green';
+        } else {
+            el.style.height = el.scrollHeight !== 0 ? el.scrollHeight + 'px' : '';
+            el.style.overflow = 'hidden';
+            el.style.background = 'yellow';
+        }
     },
     afterEnter: function afterEnter(el) {
-        UTILS.removeCls(el, 'transition');
-        el.style.height = '';
+        /* 如果是ie9,调换enter和afterenter的顺序，*/
+        var ieVersion = UTILS.getIeVersion(); //false-非ie,否则则是 MSIE 9.0
+        if (ieVersion == 'MSIE 9.0') {
+            el.style.height = el.scrollHeight !== 0 ? el.scrollHeight + 'px' : '';
+            el.style.overflow = 'hidden';
+            el.style.background = 'yellow';
+        } else {
+            UTILS.removeCls(el, 'transition');
+            el.style.height = '';
+            el.style.background = 'green';
+        }
     },
     beforeLeave: function beforeLeave(el) {
         UTILS.addCls(el, 'transition');
@@ -25908,6 +25930,22 @@ var Utils = function () {
             var newClsNames = oldClsNames.replace(clsName, '');
             el.setAttribute("class", newClsNames);
         }
+
+        /**
+         * 获取ie浏览器的版本号，如果不是ie,则返回false
+         */
+
+    }, {
+        key: "getIeVersion",
+        value: function getIeVersion() {
+            var agent = window.navigator.userAgent;
+            var isIE = agent.indexOf("MSIE") > -1 && agent.indexOf("Trident") > -1;
+            if (!isIE) {
+                return false;
+            }
+            var version = agent.match(/MSIE\s[0-9].?[0-9]/)[0]; //6,7,8,9,10,11等等
+            return version;
+        }
     }]);
     return Utils;
 }();
@@ -26000,11 +26038,7 @@ var render = function() {
   return _c("compoTransition", [
     _c(
       "ul",
-      {
-        staticClass: "TtreeNode-wrapper",
-        class: _vm.computedNodeWrapperCls,
-        style: _vm.computedNodeWrapperStyles
-      },
+      { staticClass: "TtreeNode-wrapper", class: _vm.computedNodeWrapperCls },
       [
         _c(
           "li",

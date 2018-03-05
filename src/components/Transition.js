@@ -9,13 +9,31 @@ const TransitionObj = {
     },
 
     enter(el) {
-        el.style.height = (el.scrollHeight !== 0) ? el.scrollHeight + 'px' : '';
-        el.style.overflow = 'hidden';
+        /* 如果是ie9,调换enter和afterenter的顺序，*/
+        let ieVersion = UTILS.getIeVersion();//false-非ie,否则则是 MSIE 9.0
+        if(ieVersion == 'MSIE 9.0'){
+
+            UTILS.removeCls(el, 'transition');
+            el.style.height = '';
+        }else{
+            el.style.height = (el.scrollHeight !== 0) ? el.scrollHeight + 'px' : '';
+            el.style.overflow = 'hidden';
+        }
+
+
     },
 
     afterEnter(el) {
-        UTILS.removeCls(el, 'transition');
-        el.style.height = '';
+        /* 如果是ie9,调换enter和afterenter的顺序，*/
+        let ieVersion = UTILS.getIeVersion();//false-非ie,否则则是 MSIE 9.0
+        if(ieVersion == 'MSIE 9.0'){
+            el.style.height = (el.scrollHeight !== 0) ? el.scrollHeight + 'px' : '';
+            el.style.overflow = 'hidden';
+        }else{
+            UTILS.removeCls(el, 'transition');
+            el.style.height = '';
+        }
+
     },
 
     beforeLeave(el) {
@@ -26,7 +44,7 @@ const TransitionObj = {
 
     leave(el) {
         if (el.scrollHeight !== 0) {
-            el.style.height = 0;
+            el.style.height = '';
         }
     },
 

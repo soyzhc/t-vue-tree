@@ -37,6 +37,17 @@ class Utils{
         el.setAttribute("class", newClsNames);
 
     }
+
+    /**
+     * 获取ie浏览器的版本号，如果不是ie,则返回false
+     */
+    getIeVersion(){
+        let agent = window.navigator.userAgent;
+        let isIE = agent.indexOf("MSIE") >-1 &&  agent.indexOf("Trident") >-1;
+        if(!isIE){return false;}
+        let version = agent.match(/MSIE\s[0-9].?[0-9]/)[0];//6,7,8,9,10,11等等
+        return version;
+    }
 }
 
 export default Utils;
