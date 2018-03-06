@@ -63,15 +63,18 @@
             </div>
 
             <div class="example-box padding">
-                <p class="example-title">事件示例：</p>
-                <p>f12打开控制台，然后分别点击选中节点、取消选中节点，勾选和取消勾选框，展开折叠节点，看看控制台打印的结果</p>
+                <h4 class="example-title">事件示例(现有3个事件)：</h4>
+                <strong>1. onToggle</strong><br>
+                <strong>2. onCheck</strong><br>
+                <strong>3. onSelect</strong><br>
+                <p>你可以f12打开控制台，然后分别点击选中节点、取消选中节点，勾选和取消勾选框，展开折叠节点，看看控制台打印的结果</p>
 
-                <p class="example-title" style="margin:10px 0 0;">方法示例：</p>
+                <h4 class="example-title" style="margin:10px 0 0;">方法示例：</h4>
                 <button class="btn btn-block" @click="getCheckedNodes('checked')">获取checked节点 getCheckedNodes('checked')</button>
                 <button class="btn btn-block" @click="getCheckedNodes('indeterminated')">获取 半勾选的节点 getCheckedNodes('indeterminated')</button>
                 <button class="btn btn-block" @click="getSelectedNodes()">获取所有选中的节点 getSelectedNodes()</button>
 
-                <p class="example-title">结果展示：</p>
+                <h4 class="example-title">结果展示：</h4>
                 <p>F12看控制台，点击每个按钮后得到的结果console.log了的，控制台更清晰</p>
                 <!--<div class="example-result-box">-->
                     <!--{{examplesObj.resultStr}}-->
