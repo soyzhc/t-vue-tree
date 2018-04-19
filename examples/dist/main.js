@@ -12188,6 +12188,9 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
 
 exports.default = {
     data: function data() {
@@ -15598,6 +15601,8 @@ exports.default = {
 
             //                that.treeData2 = fn(arr, {});
             that.treeData2 = fn(metaData.data, {});
+
+            console.log(metaData.data);
         },
         realData: function realData() {
             var me = this;
@@ -16169,9 +16174,10 @@ exports.default = {
         },
         computedNodeWrapperStyles: function computedNodeWrapperStyles() {
             var that = this;
-            var result = 'height:auto !important;overflow:auto !important;background:green;';
+            // 例如可以写如下的样式
+            //let result = 'height:auto !important;overflow:auto !important;background:green;';
 
-            //                let result = '';
+            var result = '';
             return result;
         },
         computedCheckBoxCls: function computedCheckBoxCls() {
@@ -16379,7 +16385,7 @@ var RouterConfig = {
 var router = new _vueRouter2.default(RouterConfig);
 
 new _vue2.default({
-    el: '#appExample',
+    el: '#appExample1',
     router: router,
     store: _vuex2.default,
     render: function render(h) {
@@ -24923,16 +24929,27 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "example-box padding" }, [
-        _c("p", { staticClass: "example-title" }, [_vm._v("事件示例：")]),
+        _c("h4", { staticClass: "example-title" }, [
+          _vm._v("事件示例(现有3个事件)：")
+        ]),
+        _vm._v(" "),
+        _c("strong", [_vm._v("1. onToggle")]),
+        _c("br"),
+        _vm._v(" "),
+        _c("strong", [_vm._v("2. onCheck")]),
+        _c("br"),
+        _vm._v(" "),
+        _c("strong", [_vm._v("3. onSelect")]),
+        _c("br"),
         _vm._v(" "),
         _c("p", [
           _vm._v(
-            "f12打开控制台，然后分别点击选中节点、取消选中节点，勾选和取消勾选框，展开折叠节点，看看控制台打印的结果"
+            "你可以f12打开控制台，然后分别点击选中节点、取消选中节点，勾选和取消勾选框，展开折叠节点，看看控制台打印的结果"
           )
         ]),
         _vm._v(" "),
         _c(
-          "p",
+          "h4",
           { staticClass: "example-title", staticStyle: { margin: "10px 0 0" } },
           [_vm._v("方法示例：")]
         ),
@@ -24976,7 +24993,7 @@ var render = function() {
           [_vm._v("获取所有选中的节点 getSelectedNodes()")]
         ),
         _vm._v(" "),
-        _c("p", { staticClass: "example-title" }, [_vm._v("结果展示：")]),
+        _c("h4", { staticClass: "example-title" }, [_vm._v("结果展示：")]),
         _vm._v(" "),
         _c("p", [
           _vm._v(
@@ -25800,7 +25817,6 @@ var TransitionObj = {
     beforeEnter: function beforeEnter(el) {
         UTILS.addCls(el, 'transition');
         el.style.height = '0';
-        el.style.background = 'pink';
     },
     enter: function enter(el) {
         /* 如果是ie9,调换enter和afterenter的顺序，*/
@@ -25809,11 +25825,9 @@ var TransitionObj = {
 
             UTILS.removeCls(el, 'transition');
             el.style.height = '';
-            el.style.background = 'green';
         } else {
             el.style.height = el.scrollHeight !== 0 ? el.scrollHeight + 'px' : '';
             el.style.overflow = 'hidden';
-            el.style.background = 'yellow';
         }
     },
     afterEnter: function afterEnter(el) {
@@ -25822,11 +25836,9 @@ var TransitionObj = {
         if (ieVersion == 'MSIE 9.0') {
             el.style.height = el.scrollHeight !== 0 ? el.scrollHeight + 'px' : '';
             el.style.overflow = 'hidden';
-            el.style.background = 'yellow';
         } else {
             UTILS.removeCls(el, 'transition');
             el.style.height = '';
-            el.style.background = 'green';
         }
     },
     beforeLeave: function beforeLeave(el) {
@@ -25836,7 +25848,7 @@ var TransitionObj = {
     },
     leave: function leave(el) {
         if (el.scrollHeight !== 0) {
-            el.style.height = 0;
+            el.style.height = '';
         }
     },
     afterLeave: function afterLeave(el) {

@@ -89,9 +89,10 @@
 
             computedNodeWrapperStyles(){
                 let that = this;
-                let result = 'height:auto !important;overflow:auto !important;background:green;';
+                // 例如可以写如下的样式
+                //let result = 'height:auto !important;overflow:auto !important;background:green;';
 
-//                let result = '';
+                let result = '';
                 return result;
             },
             computedCheckBoxCls(){

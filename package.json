@@ -7,7 +7,7 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "webpack-dev-server --hot --inline",
 		"build": "webpack --display-error-details --config build/webpack.config.dist.js",
-		"examplesDev": "webpack-dev-server --open --inline --hot --host 10.176.162.201 --port 2337 --config build/webpack.config.examples.js",
+		"examplesDev": "webpack-dev-server --open --inline --hot --host localhost --port 2337 --config build/webpack.config.examples.js",
 		"examplesBuild": "webpack --config build/webpack.config.examples.js"
 	},
 	"repository": {

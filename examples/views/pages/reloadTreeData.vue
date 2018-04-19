@@ -3796,6 +3796,8 @@
 //                that.treeData2 = fn(arr, {});
                 that.treeData2 = fn(metaData.data, {});
 
+                console.log(metaData.data);
+
             },
 
             realData(){

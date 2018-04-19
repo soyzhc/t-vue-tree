@@ -27,7 +27,7 @@ const RouterConfig = {
 const router = new VueRouter(RouterConfig);
 
 new Vue({
-    el: '#appExample',
+    el: '#appExample1',
     router: router,
     store,
     render: h => h(App)
