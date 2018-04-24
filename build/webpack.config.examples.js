@@ -33,6 +33,11 @@ module.exports = {
                 exclude: /node_modules|vue\/dist|vue-router\/|vue-loader\/|vue-hot-reload-api\//,
                 loader: 'babel-loader'
             },
+            // 加载json文件
+            {
+                test: /\.json$/,
+                use: ['json-loader'],
+            },
             {
                 test: /\.(png|jpg|gif|ttf|svg|woff|eot)$/,
                 loader: 'url-loader',

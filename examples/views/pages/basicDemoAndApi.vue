@@ -79,12 +79,154 @@
                 <!--<div class="example-result-box">-->
                     <!--{{examplesObj.resultStr}}-->
                 <!--</div>-->
-
+            </div>
+            <div class="example-box padding">
+                <h4 class="example-title">树的数据示例，留意注释中各个节点的属性说明：</h4>
+                <hr>
+                <div class="example-inner-box">
+                     <pre>
+                         <code>
+                             [
+                             {
+                             "title": "parent 1-new2",
+                             "expanded": false,
+                             "checkbox": true,//是否有勾选框,默认false
+                             "checked": false,//是否勾选该节点，默认false
+                             "selected": false,//是否选中该节点，默认false
+                             "custormKey": "ccdf",
+                             "children": [
+                             {
+                             "title": "parent 1-1",
+                             "expanded": true,
+                             "checkbox": true,//是否有勾选框,默认false
+                             "checked": false,//是否勾选该节点，默认false
+                             "custormKey": "ccdf",
+                             "children": [
+                             {
+                             "title": "leaf 1-1-1",
+                             "expanded":true,
+                             "checkbox": true,//是否有勾选框,默认false
+                             "checked": false,//是否勾选该节点，默认false
+                             "custormKey": "ccdf"
+                             },
+                             {
+                             "title": "leaf 1-1-2",
+                             "expanded":true,
+                             "checkbox": true,//是否有勾选框,默认false
+                             "checked": false,//是否勾选该节点，默认false
+                             "selected":true,//是否选中该节点，默认false
+                             "custormKey": "ccdf"
+                             }
+                             ]
+                             },
+                             {
+                             "title": "parent 1-2",
+                             "expanded": true,
+                             "checkbox": true,//是否有勾选框,默认false
+                             "checked": false,//是否勾选该节点，默认false
+                             "custormKey": "ccdf",
+                             "children": [
+                             {
+                             "title": "leaf 1-2-1",
+                             "expanded": true,
+                             "checkbox": true,//是否有勾选框,默认false
+                             "checked": false,//是否勾选该节点，默认false
+                             "custormKey": "ccdf",
+                             "children": [
+                             {
+                             "title": "leaf 1-2-1-1",
+                             "expanded": true,
+                             "checkbox": true,//是否有勾选框,默认false
+                             "checked": false,//是否勾选该节点，默认false
+                             "custormKey": "mmccf",
+                             },
+                             {
+                             "title": "leaf 1-2-1-2",
+                             "expanded": true,
+                             "checkbox": true,//是否有勾选框,默认false
+                             "checked": false,//是否勾选该节点，默认false
+                             "custormKey": "mmccf",
+                             },
+                             {
+                             "title": "leaf 1-2-1-3",
+                             "expanded": true,
+                             "checkbox": true,//是否有勾选框,默认false
+                             "checked": false,//是否勾选该节点，默认false
+                             "custormKey": "mmccf",
+                             }
+                             ]
+                             },
+                             {
+                             "title": "leaf 1-2-1",
+                             "expanded": true,
+                             "checkbox": true,//是否有勾选框,默认false
+                             "checked": false,//是否勾选该节点，默认false
+                             "custormKey": "ccdf",
+                             }
+                             ]
+                             }
+                             ]
+                             },
+                             {
+                             "title": "parent 2-new",
+                             "expanded": true,
+                             "checkbox": true,//是否有勾选框,默认false
+                             "checked": true,//是否勾选该节点，默认false
+                             "children": [
+                             {
+                             "title": "parent 2-1",
+                             "checkbox": true,//是否有勾选框,默认false
+                             "checked": true,//是否勾选该节点，默认false
+                             "expanded": true,//是否展开该节点
+                             "selected": false,//是否选中该节点，默认false
+                             "expandOnClickNode": false,//点击节点时也展开节点，需要expand属性同时为真，默认false
+                             "children": [
+                             {
+                             "title": "leaf 2-1-1",
+                             "expanded": true,
+                             "checkbox": true,//是否有勾选框,默认false
+                             "checked": true //是否勾选该节点，默认false
+                             },
+                             {
+                             "title": "leaf 2-1-2",
+                             "expanded": true,
+                             "checkbox": true,//是否有勾选框,默认false
+                             "checked": true //是否勾选该节点，默认false
+                             }
+                             ]
+                             },
+                             {
+                             "title": "parent 2-2",
+                             "expanded": false,
+                             "checkbox": true,//是否有勾选框,默认false
+                             "checked": true,//是否勾选该节点，默认false
+                             "children": [
+                             {
+                             "title": "leaf 2-2-1",
+                             "expanded": true,
+                             "checkbox": true,//是否有勾选框,默认false
+                             "checked": true //是否勾选该节点，默认false
+                             }
+                             //                                    {
+                             //                                        "title": "leaf 2-2-1",
+                             //                                        "expanded": true,
+                             //                                        "checkbox": true,//是否有勾选框,默认false
+                             //                                        "checked": true,//是否勾选该节点，默认false
+                             //                                    }
+                             ]
+                             }
+                             ]
+                             }
+                             ]
+                         </code>
+                     </pre>
+                </div>
             </div>
         </section>
     </div>
 </template>
 <script>
+    import json from '../../mockData/treeData.json';
     export default {
         data(){
             return {
@@ -109,136 +251,136 @@
                 treeSelectable: true,//点击树节点时，是否有选中效果，默认true,
                 treeSelectType: "single",//点击树节点时的选中效果是单选还是多选,默认single
                 treeData: [
-                    {
-                        title: 'parent 1-new2',
-                        expanded: false,
-                        checkbox: true,//是否有勾选框,默认false
-                        checked: false,//是否勾选该节点，默认false
-                        selected: false,//是否选中该节点，默认false
-                        custormKey: 'ccdf',
-                        children: [
-                            {
-                                title: 'parent 1-1',
-                                expanded: true,
-                                checkbox: true,//是否有勾选框,默认false
-                                checked: false,//是否勾选该节点，默认false
-                                custormKey: 'ccdf',
-                                children: [
-                                    {
-                                        title: 'leaf 1-1-1',
-                                        expanded:true,
-                                        checkbox: true,//是否有勾选框,默认false
-                                        checked: false,//是否勾选该节点，默认false
-                                        custormKey: 'ccdf',
-                                    },
-                                    {
-                                        title: 'leaf 1-1-2',
-                                        expanded:true,
-                                        checkbox: true,//是否有勾选框,默认false
-                                        checked: false,//是否勾选该节点，默认false
-                                        selected:true,//是否选中该节点，默认false
-                                        custormKey: 'ccdf',
-                                    }
-                                ]
-                            },
-                            {
-                                title: 'parent 1-2',
-                                expanded: true,
-                                checkbox: true,//是否有勾选框,默认false
-                                checked: false,//是否勾选该节点，默认false
-                                custormKey: 'ccdf',
-                                children: [
-                                    {
-                                        title: 'leaf 1-2-1',
-                                        expanded: true,
-                                        checkbox: true,//是否有勾选框,默认false
-                                        checked: false,//是否勾选该节点，默认false
-                                        custormKey: 'ccdf',
-                                        children: [
-                                            {
-                                                title: 'leaf 1-2-1-1',
-                                                expanded: true,
-                                                checkbox: true,//是否有勾选框,默认false
-                                                checked: false,//是否勾选该节点，默认false
-                                                custormKey: 'mmccf',
-                                            },
-                                            {
-                                                title: 'leaf 1-2-1-2',
-                                                expanded: true,
-                                                checkbox: true,//是否有勾选框,默认false
-                                                checked: false,//是否勾选该节点，默认false
-                                                custormKey: 'mmccf',
-                                            },
-                                            {
-                                                title: 'leaf 1-2-1-3',
-                                                expanded: true,
-                                                checkbox: true,//是否有勾选框,默认false
-                                                checked: false,//是否勾选该节点，默认false
-                                                custormKey: 'mmccf',
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        title: 'leaf 1-2-1',
-                                        expanded: true,
-                                        checkbox: true,//是否有勾选框,默认false
-                                        checked: false,//是否勾选该节点，默认false
-                                        custormKey: 'ccdf',
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        title: 'parent 2-new',
-                        expanded: true,
-                        checkbox: true,//是否有勾选框,默认false
-                        checked: true,//是否勾选该节点，默认false
-                        children: [
-                            {
-                                title: 'parent 2-1',
-                                checkbox: true,//是否有勾选框,默认false
-                                checked: true,//是否勾选该节点，默认false
-                                expanded: true,//是否展开该节点
-                                selected: false,//是否选中该节点，默认false
-                                expandOnClickNode: false,//点击节点时也展开节点，需要expand属性同时为真，默认false
-                                children: [
-                                    {
-                                        title: 'leaf 2-1-1',
-                                        expanded: true,
-                                        checkbox: true,//是否有勾选框,默认false
-                                        checked: true,//是否勾选该节点，默认false
-                                    },
-                                    {
-                                        title: 'leaf 2-1-2',
-                                        expanded: true,
-                                        checkbox: true,//是否有勾选框,默认false
-                                        checked: true,//是否勾选该节点，默认false
-                                    }
-                                ]
-                            },
-                            {
-                                title: 'parent 2-2',
-                                expanded: false,
-                                checkbox: true,//是否有勾选框,默认false
-                                checked: true,//是否勾选该节点，默认false
-                                children: [
-                                    {
-                                        title: 'leaf 2-2-1',
-                                        expanded: true,
-                                        checkbox: true,//是否有勾选框,默认false
-                                        checked: true,//是否勾选该节点，默认false
-                                    }
+//                    {
+//                        title: 'parent 1-new2',
+//                        expanded: false,
+//                        checkbox: true,//是否有勾选框,默认false
+//                        checked: false,//是否勾选该节点，默认false
+//                        selected: false,//是否选中该节点，默认false
+//                        custormKey: 'ccdf',
+//                        children: [
+//                            {
+//                                title: 'parent 1-1',
+//                                expanded: true,
+//                                checkbox: true,//是否有勾选框,默认false
+//                                checked: false,//是否勾选该节点，默认false
+//                                custormKey: 'ccdf',
+//                                children: [
+//                                    {
+//                                        title: 'leaf 1-1-1',
+//                                        expanded:true,
+//                                        checkbox: true,//是否有勾选框,默认false
+//                                        checked: false,//是否勾选该节点，默认false
+//                                        custormKey: 'ccdf',
+//                                    },
+//                                    {
+//                                        title: 'leaf 1-1-2',
+//                                        expanded:true,
+//                                        checkbox: true,//是否有勾选框,默认false
+//                                        checked: false,//是否勾选该节点，默认false
+//                                        selected:true,//是否选中该节点，默认false
+//                                        custormKey: 'ccdf',
+//                                    }
+//                                ]
+//                            },
+//                            {
+//                                title: 'parent 1-2',
+//                                expanded: true,
+//                                checkbox: true,//是否有勾选框,默认false
+//                                checked: false,//是否勾选该节点，默认false
+//                                custormKey: 'ccdf',
+//                                children: [
+//                                    {
+//                                        title: 'leaf 1-2-1',
+//                                        expanded: true,
+//                                        checkbox: true,//是否有勾选框,默认false
+//                                        checked: false,//是否勾选该节点，默认false
+//                                        custormKey: 'ccdf',
+//                                        children: [
+//                                            {
+//                                                title: 'leaf 1-2-1-1',
+//                                                expanded: true,
+//                                                checkbox: true,//是否有勾选框,默认false
+//                                                checked: false,//是否勾选该节点，默认false
+//                                                custormKey: 'mmccf',
+//                                            },
+//                                            {
+//                                                title: 'leaf 1-2-1-2',
+//                                                expanded: true,
+//                                                checkbox: true,//是否有勾选框,默认false
+//                                                checked: false,//是否勾选该节点，默认false
+//                                                custormKey: 'mmccf',
+//                                            },
+//                                            {
+//                                                title: 'leaf 1-2-1-3',
+//                                                expanded: true,
+//                                                checkbox: true,//是否有勾选框,默认false
+//                                                checked: false,//是否勾选该节点，默认false
+//                                                custormKey: 'mmccf',
+//                                            }
+//                                        ]
+//                                    },
+//                                    {
+//                                        title: 'leaf 1-2-1',
+//                                        expanded: true,
+//                                        checkbox: true,//是否有勾选框,默认false
+//                                        checked: false,//是否勾选该节点，默认false
+//                                        custormKey: 'ccdf',
+//                                    }
+//                                ]
+//                            }
+//                        ]
+//                    },
+//                    {
+//                        title: 'parent 2-new',
+//                        expanded: true,
+//                        checkbox: true,//是否有勾选框,默认false
+//                        checked: true,//是否勾选该节点，默认false
+//                        children: [
+//                            {
+//                                title: 'parent 2-1',
+//                                checkbox: true,//是否有勾选框,默认false
+//                                checked: true,//是否勾选该节点，默认false
+//                                expanded: true,//是否展开该节点
+//                                selected: false,//是否选中该节点，默认false
+//                                expandOnClickNode: false,//点击节点时也展开节点，需要expand属性同时为真，默认false
+//                                children: [
+//                                    {
+//                                        title: 'leaf 2-1-1',
+//                                        expanded: true,
+//                                        checkbox: true,//是否有勾选框,默认false
+//                                        checked: true,//是否勾选该节点，默认false
+//                                    },
+//                                    {
+//                                        title: 'leaf 2-1-2',
+//                                        expanded: true,
+//                                        checkbox: true,//是否有勾选框,默认false
+//                                        checked: true,//是否勾选该节点，默认false
+//                                    }
+//                                ]
+//                            },
+//                            {
+//                                title: 'parent 2-2',
+//                                expanded: false,
+//                                checkbox: true,//是否有勾选框,默认false
+//                                checked: true,//是否勾选该节点，默认false
+//                                children: [
 //                                    {
 //                                        title: 'leaf 2-2-1',
 //                                        expanded: true,
 //                                        checkbox: true,//是否有勾选框,默认false
 //                                        checked: true,//是否勾选该节点，默认false
 //                                    }
-                                ]
-                            }
-                        ]
-                    }
+////                                    {
+////                                        title: 'leaf 2-2-1',
+////                                        expanded: true,
+////                                        checkbox: true,//是否有勾选框,默认false
+////                                        checked: true,//是否勾选该节点，默认false
+////                                    }
+//                                ]
+//                            }
+//                        ]
+//                    }
                 ]
             }
         },
@@ -280,6 +422,13 @@
                 let oldVal = that.examplesObj[idx].bottomShow;
                 that.$set(that.examplesObj[idx], 'bottomShow', !oldVal);
             }
+        },
+
+        created() {
+            let that = this;
+
+            console.log(json)
+            that.treeData = json.data;
         }
     }
 </script>
