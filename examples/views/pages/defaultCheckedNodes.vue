@@ -9,6 +9,7 @@
             <br>
             <button type="button" class="btn" @click="checkedParentNodeTree">初始勾选第一个父节点的树</button>
             <p>注意：这种写法，只会勾选上第一个父节点，不会勾上子节点。这是正常的，组件设计如此。如果你需要勾上内部的子节点，需要自行处理传入数据中的子节点的checked的状态为'checked'或者'indeterminated'或者''</p>
+            <button type="button" class="btn" @click="checkNodes">勾选节点</button>
             <button type="button" class="btn" @click="checkedLeafNodeTree">初始勾选第一个子节点的树</button>
             <div class="example-box" ref="containerNode">
                 <div class="top demo1-tree-wrapper">
@@ -119,11 +120,26 @@
             checkedLeafNodeTree(){
                 let that = this;
 
+            },
+
+            checkNodes(){
+                let that = this;
+                let tree = that.$refs.demotree;
+
+                tree.checkNode({
+                    key: 'id',
+                    val: [1, 1234556]
+                });
             }
         },
 
         created(){
             let that = this;
+
+            // 初始加载默认的全量树，无任何勾选和选中状态的全量树
+            that.treeData = json.data.map(it => {
+                return it;
+            });
         }
     }
 </script>

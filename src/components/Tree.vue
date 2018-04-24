@@ -142,7 +142,6 @@
 
             _propagateUp(nodekey){
                 let that = this;
-
                 const parentKey = that.flatTree[nodekey].parent;
                 if (parentKey === undefined) {
                     return;
@@ -247,6 +246,40 @@
                 let that = this;
 
                 that.treeAllData = [];
+            },
+
+            checkNode({key, val}){
+                if(!key || !val){throw '需要传入标识字段key和值val'}
+                let that = this;
+                let idsObj = {};
+
+                val.forEach(it=>{
+                    idsObj[it] = true;
+                });
+
+                let flatNodes =  that.flatTree;
+                // 先找到勾选的节点；
+                let checkedNodes = [];
+
+                for(let i = 0,len = flatNodes.length;i < len;i++){
+                    let oNode = flatNodes[i];
+                    let oNodeCustormKey = oNode.node[key];
+                    if(idsObj[oNodeCustormKey]){
+                        checkedNodes.push(oNode);
+
+                        that.$set(oNode.node, 'checked', true);
+                        that.$set(oNode.node, 'indeterminated', false);
+                    }
+                }
+
+                // 处理该节点相关的父节点的勾选或者半勾选状态
+                checkedNodes.forEach(node =>{
+                    that._propagateUp(node.nodeKey);
+                    (node.children && node.children.length) && that._propagetaDown(node.node, {
+                        checked: true,
+                        indeterminated: false
+                    });
+                });
             }
         },
 
