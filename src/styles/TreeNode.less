@@ -2,6 +2,7 @@
 
     .TtreeNode-wrapper{
         display: block;
+        //overflow: auto;
         ul{
             display: block;
             list-style: none;
@@ -11,7 +12,7 @@
         }
         li{
             vertical-align:bottom;
-
+            white-space: nowrap;
             line-height: 22px;
             font-size:14px;
             ul{
@@ -108,6 +109,7 @@
 
         .text-wrapper{
             display: inline-block;
+            white-space: nowrap;
             &:hover{
                 background: #eaf4fe;
             }

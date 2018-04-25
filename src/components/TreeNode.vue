@@ -20,7 +20,10 @@
                        class="checkbox-checkbox"
                        @change="checkboxChange">
            </span>
-                <span class="text-wrapper" :class="computedTextCls" @click="handleClick">
+                <span class="text-wrapper"
+                      :title="data.title"
+                      :class="computedTextCls"
+                      @click="handleClick">
                {{data.title}}
            </span>
 
