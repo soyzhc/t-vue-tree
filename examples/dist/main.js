@@ -12275,6 +12275,9 @@ exports.default = {
         onSelectHandle: function onSelectHandle(val) {
             console.log('onSelectHandle', val);
         },
+        onDblclickTextHandle: function onDblclickTextHandle(val) {
+            console.log('onDblclickTextHandle', val);
+        },
 
         /**
          *
@@ -12311,6 +12314,21 @@ exports.default = {
         that.treeData = _treeData2.default.data;
     }
 }; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -12668,7 +12686,7 @@ exports.default = {
 /* 136 */
 /***/ (function(module, exports) {
 
-module.exports = {"data":[{"id":"1","title":"parent 1-new2","expanded":false,"checkbox":true,"checked":false,"selected":false,"custormKey":"ccdf","children":[{"title":"parent 1-1","expanded":true,"checkbox":true,"checked":false,"custormKey":"ccdf","children":[{"title":"leaf 1-1-1 特别长长长长长长长长长长长长的文字","expanded":true,"checkbox":true,"checked":false,"custormKey":"ccdf"},{"title":"leaf 1-1-2","expanded":true,"checkbox":true,"checked":false,"selected":true,"custormKey":"ccdf"}]},{"title":"parent 1-2","expanded":true,"checkbox":true,"checked":false,"custormKey":"ccdf","children":[{"title":"leaf 1-2-1","expanded":true,"checkbox":true,"checked":false,"custormKey":"ccdf","children":[{"title":"leaf 1-2-1-1","expanded":true,"checkbox":true,"checked":false,"custormKey":"mmccf"},{"title":"leaf 1-2-1-2","expanded":true,"checkbox":true,"checked":false,"custormKey":"mmccf"},{"title":"leaf 1-2-1-3","expanded":true,"checkbox":true,"checked":false,"custormKey":"mmccf"}]},{"title":"leaf 1-2-1","expanded":true,"checkbox":true,"checked":false,"custormKey":"ccdf"}]}]},{"title":"parent 2-new","expanded":true,"checkbox":true,"checked":false,"children":[{"id":"1234556","title":"parent 2-1","checkbox":true,"checked":false,"expanded":true,"selected":false,"expandOnClickNode":false,"children":[{"title":"leaf 2-1-1","expanded":true,"checkbox":true,"checked":false},{"title":"leaf 2-1-2","expanded":true,"checkbox":true,"checked":false}]},{"title":"parent 2-2","expanded":false,"checkbox":true,"checked":false,"children":[{"title":"leaf 2-2-1","expanded":true,"checkbox":true,"checked":false}]}]}]}
+module.exports = {"data":[{"id":"1","title":"parent 1-new2","expanded":false,"checkbox":true,"checked":false,"selected":false,"custormKey":"ccdf","children":[{"id":"11","title":"parent 1-1","expanded":true,"checkbox":true,"checked":false,"custormKey":"ccdf","children":[{"id":"111","title":"leaf 1-1-1 特别长长长长长长长长长长长长的文字","expanded":true,"checkbox":true,"checked":false,"custormKey":"ccdf"},{"id":"112","title":"leaf 1-1-2","expanded":true,"checkbox":true,"checked":false,"selected":true,"custormKey":"ccdf"}]},{"title":"parent 1-2","expanded":true,"checkbox":true,"checked":false,"custormKey":"ccdf","children":[{"title":"leaf 1-2-1","expanded":true,"checkbox":true,"checked":false,"custormKey":"ccdf","children":[{"title":"leaf 1-2-1-1","expanded":true,"checkbox":true,"checked":false,"custormKey":"mmccf"},{"title":"leaf 1-2-1-2","expanded":true,"checkbox":true,"checked":false,"custormKey":"mmccf"},{"title":"leaf 1-2-1-3","expanded":true,"checkbox":true,"checked":false,"custormKey":"mmccf"}]},{"title":"leaf 1-2-1","expanded":true,"checkbox":true,"checked":false,"custormKey":"ccdf"}]}]},{"title":"parent 2-new","expanded":true,"checkbox":true,"checked":false,"children":[{"id":"1234556","title":"parent 2-1","checkbox":true,"checked":false,"expanded":true,"selected":false,"expandOnClickNode":false,"children":[{"title":"leaf 2-1-1","expanded":true,"checkbox":true,"checked":false},{"title":"leaf 2-1-2","expanded":true,"checkbox":true,"checked":false}]},{"title":"parent 2-2","expanded":false,"checkbox":true,"checked":false,"children":[{"title":"leaf 2-2-1","expanded":true,"checkbox":true,"checked":false}]}]}]}
 
 /***/ }),
 /* 137 */
@@ -16230,6 +16248,15 @@ exports.default = {
                 key: 'id',
                 val: [1, 1234556]
             });
+        },
+        expandNodes: function expandNodes() {
+            var that = this;
+            var tree = that.$refs.demotree;
+
+            tree.expandNode({
+                key: 'id',
+                val: [11]
+            });
         }
     },
 
@@ -16242,6 +16269,7 @@ exports.default = {
         });
     }
 }; //
+//
 //
 //
 //
@@ -16419,6 +16447,19 @@ exports.default = {
                 that.$emit('onSelect', params);
             }
         },
+
+
+        /**
+         * 文字をダブルクリックした時,選択状態にしないよ
+         * @param params
+         * @private
+         */
+        _handleDblClickText: function _handleDblClickText(params) {
+            var that = this;
+
+            //今操作してるのツリーノードを外に通知
+            that.$emit('onDblclickText', params);
+        },
         _propagateUp: function _propagateUp(nodekey) {
             var that = this;
             var parentKey = that.flatTree[nodekey].parent;
@@ -16526,6 +16567,13 @@ exports.default = {
 
             that.treeAllData = [];
         },
+
+
+        /**
+         * 勾选指定节点
+         * @param key
+         * @param val
+         */
         checkNode: function checkNode(_ref) {
             var key = _ref.key,
                 val = _ref.val;
@@ -16563,6 +16611,36 @@ exports.default = {
                     indeterminated: false
                 });
             });
+        },
+
+
+        /**
+         * 展开指定节点
+         * @param key
+         * @param val
+         */
+        expandNode: function expandNode(_ref2) {
+            var key = _ref2.key,
+                val = _ref2.val;
+
+            if (!key || !val) {
+                throw '需要传入标识字段key和值val';
+            }
+            var that = this;
+            var idsObj = {};
+
+            val.forEach(function (it) {
+                idsObj[it] = true;
+            });
+            var flatNodes = that.flatTree;
+
+            for (var i = 0, len = flatNodes.length; i < len; i++) {
+                var oNode = flatNodes[i];
+                var oNodeCustormKey = oNode.node[key];
+                if (idsObj[oNodeCustormKey]) {
+                    that.$set(oNode.node, 'expanded', true);
+                }
+            }
         }
     },
 
@@ -16580,6 +16658,7 @@ exports.default = {
         });
         that.$on('handleCheckbox', that._handleCheckbox);
         that.$on('handleClickText', that._handleClickText);
+        that.$on('handleDblClickText', that._handleDblClickText);
 
         //            this.$on('toggle-expand', node => this.$emit('on-toggle-expand', node));
     }
@@ -16644,7 +16723,7 @@ exports.default = {
     },
     data: function data() {
         return {
-
+            timer: null,
             //                treeAllData:[]
             nodeSelectable: true,
             nodeSelectType: 'single'
@@ -16703,14 +16782,29 @@ exports.default = {
     methods: {
         handleClick: function handleClick() {
             var that = this;
-            var item = that.data;
+            //                let item = that.data;
+            clearTimeout(that.timer);
+            that.timer = setTimeout(function () {
+                var parent = that._getParent();
+
+                /* このノードのselected状態を変え */
+                if (that.nodeSelectable) {
+                    that.$set(that.data, 'selected', !that.data.selected);
+                }
+                parent.$emit.apply(parent, ['handleClickText'].concat(that.data));
+            }, 200);
+        },
+
+
+        /**
+         * 双击文字节点
+         */
+        handleDblclick: function handleDblclick() {
+            var that = this;
+            clearTimeout(that.timer);
             var parent = that._getParent();
 
-            /* このノードのselected状態を変え */
-            if (that.nodeSelectable) {
-                that.$set(that.data, 'selected', !that.data.selected);
-            }
-            parent.$emit.apply(parent, ['handleClickText'].concat(that.data));
+            parent.$emit.apply(parent, ['handleDblClickText'].concat(that.data));
         },
         handleExpand: function handleExpand() {
             var that = this;
@@ -16759,6 +16853,7 @@ exports.default = {
         /* 设置所有节点的选中配置 --end-- */
     }
 }; //
+//
 //
 //
 //
@@ -25416,7 +25511,8 @@ var render = function() {
               on: {
                 onToggle: _vm.onToggleHandle,
                 onCheck: _vm.onCheckHandle,
-                onSelect: _vm.onSelectHandle
+                onSelect: _vm.onSelectHandle,
+                onDblclickText: _vm.onDblclickTextHandle
               }
             })
           ],
@@ -25451,81 +25547,138 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "example-box padding" }, [
-        _c("h4", { staticClass: "example-title" }, [
-          _vm._v("事件示例(现有3个事件)：")
-        ]),
-        _vm._v(" "),
-        _c("strong", [_vm._v("1. onToggle")]),
-        _c("br"),
-        _vm._v(" "),
-        _c("strong", [_vm._v("2. onCheck")]),
-        _c("br"),
-        _vm._v(" "),
-        _c("strong", [_vm._v("3. onSelect")]),
-        _c("br"),
-        _vm._v(" "),
-        _c("p", [
+      _c(
+        "div",
+        { staticClass: "example-box padding" },
+        [
+          _c("h4", { staticClass: "example-title" }, [
+            _vm._v("事件示例(现有4个事件)：")
+          ]),
+          _vm._v(" "),
+          _c("strong", [_vm._v("1. onToggle")]),
+          _c("br"),
+          _vm._v(" "),
+          _c("strong", [_vm._v("2. onCheck")]),
+          _c("br"),
+          _vm._v(" "),
+          _c("strong", [_vm._v("3. onSelect")]),
+          _c(
+            "em",
+            {
+              staticStyle: {
+                verticalAlign: "baseline",
+                paddingLeft: "5px",
+                "font-size": "12px",
+                color: "#666"
+              }
+            },
+            [_vm._v("(这个事件可以看做是单击版的clickTextHandle)")]
+          ),
+          _c("br"),
+          _vm._v(" "),
+          _c("strong", [_vm._v("4. onDblclickTextHandle")]),
+          _c("br"),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "你可以f12打开控制台，然后分别点击选中节点、取消选中节点，勾选和取消勾选框，展开折叠节点，看看控制台打印的结果"
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "h4",
+            {
+              staticClass: "example-title",
+              staticStyle: { margin: "10px 0 0" }
+            },
+            [_vm._v("方法示例：")]
+          ),
+          _vm._v(" "),
+          _c("p", [_vm._v("1.")]),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-block",
+              on: {
+                click: function($event) {
+                  _vm.getCheckedNodes("checked")
+                }
+              }
+            },
+            [_vm._v("获取checked节点 getCheckedNodes('checked')")]
+          ),
+          _vm._v(" "),
+          _c("p", [_vm._v("2.")]),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-block",
+              on: {
+                click: function($event) {
+                  _vm.getCheckedNodes("indeterminated")
+                }
+              }
+            },
+            [_vm._v("获取 半勾选的节点 getCheckedNodes('indeterminated')")]
+          ),
+          _vm._v(" "),
+          _c("p", [_vm._v("3.")]),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-block",
+              on: {
+                click: function($event) {
+                  _vm.getSelectedNodes()
+                }
+              }
+            },
+            [_vm._v("获取所有选中的节点 getSelectedNodes()")]
+          ),
+          _vm._v(" "),
+          _c("p", [_vm._v("4.")]),
           _vm._v(
-            "你可以f12打开控制台，然后分别点击选中节点、取消选中节点，勾选和取消勾选框，展开折叠节点，看看控制台打印的结果"
-          )
-        ]),
-        _vm._v(" "),
-        _c(
-          "h4",
-          { staticClass: "example-title", staticStyle: { margin: "10px 0 0" } },
-          [_vm._v("方法示例：")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-block",
-            on: {
-              click: function($event) {
-                _vm.getCheckedNodes("checked")
-              }
-            }
-          },
-          [_vm._v("获取checked节点 getCheckedNodes('checked')")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-block",
-            on: {
-              click: function($event) {
-                _vm.getCheckedNodes("indeterminated")
-              }
-            }
-          },
-          [_vm._v("获取 半勾选的节点 getCheckedNodes('indeterminated')")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-block",
-            on: {
-              click: function($event) {
-                _vm.getSelectedNodes()
-              }
-            }
-          },
-          [_vm._v("获取所有选中的节点 getSelectedNodes()")]
-        ),
-        _vm._v(" "),
-        _c("h4", { staticClass: "example-title" }, [_vm._v("结果展示：")]),
-        _vm._v(" "),
-        _c("p", [
+            "\n                checkNode({key, val}) 勾选树节点，与该节点相关的父子节点会自动勾上勾选或者半勾选状态\n                "
+          ),
+          _vm._m(1),
+          _vm._v(" "),
+          _c("p", [_vm._v("key: Sring | 节点的键")]),
+          _vm._v(" "),
+          _c("p", [_vm._v("val: Array | key键对应的值，是个数组，")]),
+          _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
+          _c("code", [
+            _vm._v("tree.checkNode({ key: 'id', val: [1, 1234556]});")
+          ]),
           _vm._v(
-            "F12看控制台，点击每个按钮后得到的结果console.log了的，控制台更清晰"
-          )
-        ])
-      ]),
+            "\n                将勾选所有拥有id且id值为1和123456的的节点，并且对其父子节点勾上全勾选or半勾选效果。"
+          ),
+          _c(
+            "router-link",
+            { attrs: { target: "_blank", to: "defaultCheckedNodes" } },
+            [_vm._v("具体例子可见另例的'调用checkNode()方法勾选节点'按钮")]
+          ),
+          _vm._v(" "),
+          _c("p", [_vm._v("5.")]),
+          _vm._v(
+            "\n                expandNode({key, val}) 展开树节点，参数说明同上\n\n                "
+          ),
+          _c("h4", { staticClass: "example-title" }, [_vm._v("结果展示：")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "F12看控制台，点击每个按钮后得到的结果console.log了的，控制台更清晰"
+            )
+          ])
+        ],
+        1
+      ),
       _vm._v(" "),
-      _vm._m(1)
+      _vm._m(3)
     ])
   ])
 }
@@ -25551,6 +25704,18 @@ var staticRenderFns = [
       ]),
       _vm._v("\n                        ")
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", [_c("strong", [_vm._v("参数说明：")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", [_c("strong", [_vm._v("例如：")])])
   },
   function() {
     var _vm = this
@@ -26350,12 +26515,12 @@ var render = function() {
           attrs: { type: "button" },
           on: { click: _vm.checkedParentNodeTree }
         },
-        [_vm._v("初始勾选第一个父节点的树")]
+        [_vm._v("设置第一个节点的checked属性为true")]
       ),
       _vm._v(" "),
       _c("p", [
         _vm._v(
-          "注意：这种写法，只会勾选上第一个父节点，不会勾上子节点。这是正常的，组件设计如此。如果你需要勾上内部的子节点，需要自行处理传入数据中的子节点的checked的状态为'checked'或者'indeterminated'或者''"
+          "注意：这种写法，只会勾选上该节点的前面的勾选框，不会有相关父子节点的级联勾选效果。这是正常的，组件设计如此。如果你需要勾上内部的子节点，我推荐使用方法：checkNode()"
         )
       ]),
       _vm._v(" "),
@@ -26366,7 +26531,17 @@ var render = function() {
           attrs: { type: "button" },
           on: { click: _vm.checkNodes }
         },
-        [_vm._v("勾选节点")]
+        [_vm._v("调用checkNode()方法勾选节点")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn",
+          attrs: { type: "button" },
+          on: { click: _vm.expandNodes }
+        },
+        [_vm._v("调用expandNode()方法展开节点")]
       ),
       _vm._v(" "),
       _c(
@@ -26937,7 +27112,7 @@ var render = function() {
                 staticClass: "text-wrapper",
                 class: _vm.computedTextCls,
                 attrs: { title: _vm.data.title },
-                on: { click: _vm.handleClick }
+                on: { click: _vm.handleClick, dblclick: _vm.handleDblclick }
               },
               [_vm._v("\n           " + _vm._s(_vm.data.title) + "\n       ")]
             ),
@@ -27105,7 +27280,7 @@ exports = module.exports = __webpack_require__(51)(true);
 
 
 // module
-exports.push([module.i, "\n.T-vue-tree-docs {\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n  padding: 15px;\n}\n.T-vue-tree-docs * {\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\n.T-vue-tree-docs ul,\n.T-vue-tree-docs ol {\n  list-style: none;\n}\n.T-vue-tree-docs h1,\n.T-vue-tree-docs h2,\n.T-vue-tree-docs h3,\n.T-vue-tree-docs h4,\n.T-vue-tree-docs h5 {\n  margin: 0;\n  padding: 0;\n  width: auto;\n  line-height: 1.5;\n}\n.T-vue-tree-docs h1 {\n  margin: 20px 0;\n  font-size: 34px;\n  color: #333;\n  font-weight: 700;\n}\n.T-vue-tree-docs h2 {\n  margin: 20px 0;\n  font-size: 24px;\n  color: #333;\n  font-weight: 600;\n}\n.T-vue-tree-docs h3 {\n  margin: 15px 0;\n  font-size: 20px;\n  color: #555;\n  font-weight: 400;\n  border: none;\n}\n.T-vue-tree-docs .title-mark {\n  width: auto !important;\n  border-bottom: 1px solid #7E43E8;\n  display: inline-block;\n}\n.T-vue-tree-docs .title-mark:before {\n  display: inline-block;\n  content: '';\n  width: 0;\n  height: 0;\n  border: 6px solid #7E43E8;\n  border-color: transparent #7E43E8  #7E43E8 transparent;\n  vertical-align: bottom;\n  margin-right: 10px;\n}\n.T-vue-tree-docs .main-content {\n  width: 80%;\n  margin: 0 auto;\n}\n.T-vue-tree-docs .main-content .inner-main-content {\n  margin-top: 30px;\n}\n@media screen and (max-width: 990px) {\n.T-vue-tree-docs .main-content {\n    width: 100%;\n}\n}\n.T-vue-tree-docs .example-box {\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  -webkit-box-shadow: 0 0 2px 0 purple;\n  -moz-box-shadow: 0 0 2px 0 purple;\n  box-shadow: 0 0 2px 0 purple;\n  min-height: 100px;\n  height: auto;\n  width: 80%;\n  margin: 0 0 10px;\n  padding: 0;\n}\n.T-vue-tree-docs .example-box:last-child {\n  margin: 0;\n}\n.T-vue-tree-docs .example-box .example-title {\n  color: #333;\n  font-size: 16px;\n  line-height: 1.5;\n}\n.T-vue-tree-docs .example-box .example-inner-box {\n  border: 1px solid #dcdcdc;\n  width: 98%;\n  margin: 5px auto;\n}\n.T-vue-tree-docs .example-box .bottom .control-part {\n  cursor: pointer;\n  text-align: center;\n  line-height: 2.5;\n  background: rgba(194, 150, 192, 0.73);\n  border-left: none;\n  border-right: none;\n}\n.T-vue-tree-docs .example-box .bottom .code-part {\n  background: #f4f3f4;\n  padding: 7px;\n  overflow: auto;\n}\n.T-vue-tree-docs .example-box.padding {\n  padding: 7px;\n}\n.T-vue-tree-docs .demo1-tree-wrapper {\n  width: 100%;\n  height: 180px;\n}\n.T-vue-tree-docs .high-light-yellow {\n  background: #DACFA3;\n}\n.T-vue-tree-docs .btn {\n  padding: 7px 13px;\n}\n.T-vue-tree-docs .btn-block {\n  display: block;\n  margin: 0 0 10px;\n}\n.T-vue-tree-docs .example-result-box {\n  width: 100%;\n  height: auto;\n  min-height: 100px;\n  max-height: 400px;\n  overflow: auto;\n  border: 1px solid #dfdfdf;\n}\n", "", {"version":3,"sources":["/Users/ty/wbPro/personalAll/npm-T-vue-tree/examples/app.vue"],"names":[],"mappings":";AAAA;EACE,+BAA+B;EAC/B,4BAA4B;EAC5B,uBAAuB;EACvB,UAAU;EACV,WAAW;EACX,cAAc;CACf;AACD;EACE,+BAA+B;EAC/B,4BAA4B;EAC5B,uBAAuB;EACvB,UAAU;EACV,WAAW;CACZ;AACD;;EAEE,iBAAiB;CAClB;AACD;;;;;EAKE,UAAU;EACV,WAAW;EACX,YAAY;EACZ,iBAAiB;CAClB;AACD;EACE,eAAe;EACf,gBAAgB;EAChB,YAAY;EACZ,iBAAiB;CAClB;AACD;EACE,eAAe;EACf,gBAAgB;EAChB,YAAY;EACZ,iBAAiB;CAClB;AACD;EACE,eAAe;EACf,gBAAgB;EAChB,YAAY;EACZ,iBAAiB;EACjB,aAAa;CACd;AACD;EACE,uBAAuB;EACvB,iCAAiC;EACjC,sBAAsB;CACvB;AACD;EACE,sBAAsB;EACtB,YAAY;EACZ,SAAS;EACT,UAAU;EACV,0BAA0B;EAC1B,uDAAuD;EACvD,uBAAuB;EACvB,mBAAmB;CACpB;AACD;EACE,WAAW;EACX,eAAe;CAChB;AACD;EACE,iBAAiB;CAClB;AACD;AACE;IACE,YAAY;CACb;CACF;AACD;EACE,+BAA+B;EAC/B,4BAA4B;EAC5B,uBAAuB;EACvB,qCAAqC;EACrC,kCAAkC;EAClC,6BAA6B;EAC7B,kBAAkB;EAClB,aAAa;EACb,WAAW;EACX,iBAAiB;EACjB,WAAW;CACZ;AACD;EACE,UAAU;CACX;AACD;EACE,YAAY;EACZ,gBAAgB;EAChB,iBAAiB;CAClB;AACD;EACE,0BAA0B;EAC1B,WAAW;EACX,iBAAiB;CAClB;AACD;EACE,gBAAgB;EAChB,mBAAmB;EACnB,iBAAiB;EACjB,sCAAsC;EACtC,kBAAkB;EAClB,mBAAmB;CACpB;AACD;EACE,oBAAoB;EACpB,aAAa;EACb,eAAe;CAChB;AACD;EACE,aAAa;CACd;AACD;EACE,YAAY;EACZ,cAAc;CACf;AACD;EACE,oBAAoB;CACrB;AACD;EACE,kBAAkB;CACnB;AACD;EACE,eAAe;EACf,iBAAiB;CAClB;AACD;EACE,YAAY;EACZ,aAAa;EACb,kBAAkB;EAClB,kBAAkB;EAClB,eAAe;EACf,0BAA0B;CAC3B","file":"app.vue","sourcesContent":[".T-vue-tree-docs {\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n  padding: 15px;\n}\n.T-vue-tree-docs * {\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\n.T-vue-tree-docs ul,\n.T-vue-tree-docs ol {\n  list-style: none;\n}\n.T-vue-tree-docs h1,\n.T-vue-tree-docs h2,\n.T-vue-tree-docs h3,\n.T-vue-tree-docs h4,\n.T-vue-tree-docs h5 {\n  margin: 0;\n  padding: 0;\n  width: auto;\n  line-height: 1.5;\n}\n.T-vue-tree-docs h1 {\n  margin: 20px 0;\n  font-size: 34px;\n  color: #333;\n  font-weight: 700;\n}\n.T-vue-tree-docs h2 {\n  margin: 20px 0;\n  font-size: 24px;\n  color: #333;\n  font-weight: 600;\n}\n.T-vue-tree-docs h3 {\n  margin: 15px 0;\n  font-size: 20px;\n  color: #555;\n  font-weight: 400;\n  border: none;\n}\n.T-vue-tree-docs .title-mark {\n  width: auto !important;\n  border-bottom: 1px solid #7E43E8;\n  display: inline-block;\n}\n.T-vue-tree-docs .title-mark:before {\n  display: inline-block;\n  content: '';\n  width: 0;\n  height: 0;\n  border: 6px solid #7E43E8;\n  border-color: transparent #7E43E8  #7E43E8 transparent;\n  vertical-align: bottom;\n  margin-right: 10px;\n}\n.T-vue-tree-docs .main-content {\n  width: 80%;\n  margin: 0 auto;\n}\n.T-vue-tree-docs .main-content .inner-main-content {\n  margin-top: 30px;\n}\n@media screen and (max-width: 990px) {\n  .T-vue-tree-docs .main-content {\n    width: 100%;\n  }\n}\n.T-vue-tree-docs .example-box {\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  -webkit-box-shadow: 0 0 2px 0 purple;\n  -moz-box-shadow: 0 0 2px 0 purple;\n  box-shadow: 0 0 2px 0 purple;\n  min-height: 100px;\n  height: auto;\n  width: 80%;\n  margin: 0 0 10px;\n  padding: 0;\n}\n.T-vue-tree-docs .example-box:last-child {\n  margin: 0;\n}\n.T-vue-tree-docs .example-box .example-title {\n  color: #333;\n  font-size: 16px;\n  line-height: 1.5;\n}\n.T-vue-tree-docs .example-box .example-inner-box {\n  border: 1px solid #dcdcdc;\n  width: 98%;\n  margin: 5px auto;\n}\n.T-vue-tree-docs .example-box .bottom .control-part {\n  cursor: pointer;\n  text-align: center;\n  line-height: 2.5;\n  background: rgba(194, 150, 192, 0.73);\n  border-left: none;\n  border-right: none;\n}\n.T-vue-tree-docs .example-box .bottom .code-part {\n  background: #f4f3f4;\n  padding: 7px;\n  overflow: auto;\n}\n.T-vue-tree-docs .example-box.padding {\n  padding: 7px;\n}\n.T-vue-tree-docs .demo1-tree-wrapper {\n  width: 100%;\n  height: 180px;\n}\n.T-vue-tree-docs .high-light-yellow {\n  background: #DACFA3;\n}\n.T-vue-tree-docs .btn {\n  padding: 7px 13px;\n}\n.T-vue-tree-docs .btn-block {\n  display: block;\n  margin: 0 0 10px;\n}\n.T-vue-tree-docs .example-result-box {\n  width: 100%;\n  height: auto;\n  min-height: 100px;\n  max-height: 400px;\n  overflow: auto;\n  border: 1px solid #dfdfdf;\n}\n"],"sourceRoot":""}]);
+exports.push([module.i, "\nh4 {\n  line-height: 2;\n}\np,\nstrong {\n  line-height: 1.5;\n}\n.T-vue-tree-docs {\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n  padding: 15px;\n}\n.T-vue-tree-docs * {\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\n.T-vue-tree-docs ul,\n.T-vue-tree-docs ol {\n  list-style: none;\n}\n.T-vue-tree-docs h1,\n.T-vue-tree-docs h2,\n.T-vue-tree-docs h3,\n.T-vue-tree-docs h4,\n.T-vue-tree-docs h5 {\n  margin: 0;\n  padding: 0;\n  width: auto;\n  line-height: 1.5;\n}\n.T-vue-tree-docs h1 {\n  margin: 20px 0;\n  font-size: 34px;\n  color: #333;\n  font-weight: 700;\n}\n.T-vue-tree-docs h2 {\n  margin: 20px 0;\n  font-size: 24px;\n  color: #333;\n  font-weight: 600;\n}\n.T-vue-tree-docs h3 {\n  margin: 15px 0;\n  font-size: 20px;\n  color: #555;\n  font-weight: 400;\n  border: none;\n}\n.T-vue-tree-docs .title-mark {\n  width: auto !important;\n  border-bottom: 1px solid #7E43E8;\n  display: inline-block;\n}\n.T-vue-tree-docs .title-mark:before {\n  display: inline-block;\n  content: '';\n  width: 0;\n  height: 0;\n  border: 6px solid #7E43E8;\n  border-color: transparent #7E43E8  #7E43E8 transparent;\n  vertical-align: bottom;\n  margin-right: 10px;\n}\n.T-vue-tree-docs .main-content {\n  width: 80%;\n  margin: 0 auto;\n}\n.T-vue-tree-docs .main-content .inner-main-content {\n  margin-top: 30px;\n}\n@media screen and (max-width: 990px) {\n.T-vue-tree-docs .main-content {\n    width: 100%;\n}\n}\n.T-vue-tree-docs .example-box {\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  -webkit-box-shadow: 0 0 2px 0 purple;\n  -moz-box-shadow: 0 0 2px 0 purple;\n  box-shadow: 0 0 2px 0 purple;\n  min-height: 100px;\n  height: auto;\n  width: 80%;\n  margin: 0 0 10px;\n  padding: 0;\n}\n.T-vue-tree-docs .example-box:last-child {\n  margin: 0;\n}\n.T-vue-tree-docs .example-box .example-title {\n  color: #333;\n  font-size: 16px;\n  line-height: 1.5;\n}\n.T-vue-tree-docs .example-box .example-inner-box {\n  border: 1px solid #dcdcdc;\n  width: 98%;\n  margin: 5px auto;\n}\n.T-vue-tree-docs .example-box .bottom .control-part {\n  cursor: pointer;\n  text-align: center;\n  line-height: 2.5;\n  background: rgba(194, 150, 192, 0.73);\n  border-left: none;\n  border-right: none;\n}\n.T-vue-tree-docs .example-box .bottom .code-part {\n  background: #f4f3f4;\n  padding: 7px;\n  overflow: auto;\n}\n.T-vue-tree-docs .example-box.padding {\n  padding: 7px;\n}\n.T-vue-tree-docs .demo1-tree-wrapper {\n  width: 100%;\n  height: 180px;\n}\n.T-vue-tree-docs .high-light-yellow {\n  background: #DACFA3;\n}\n.T-vue-tree-docs .btn {\n  padding: 7px 13px;\n}\n.T-vue-tree-docs .btn-block {\n  display: block;\n  margin: 0 0 10px;\n}\n.T-vue-tree-docs .example-result-box {\n  width: 100%;\n  height: auto;\n  min-height: 100px;\n  max-height: 400px;\n  overflow: auto;\n  border: 1px solid #dfdfdf;\n}\n", "", {"version":3,"sources":["/Users/ty/wbPro/personalAll/npm-T-vue-tree/examples/app.vue"],"names":[],"mappings":";AAAA;EACE,eAAe;CAChB;AACD;;EAEE,iBAAiB;CAClB;AACD;EACE,+BAA+B;EAC/B,4BAA4B;EAC5B,uBAAuB;EACvB,UAAU;EACV,WAAW;EACX,cAAc;CACf;AACD;EACE,+BAA+B;EAC/B,4BAA4B;EAC5B,uBAAuB;EACvB,UAAU;EACV,WAAW;CACZ;AACD;;EAEE,iBAAiB;CAClB;AACD;;;;;EAKE,UAAU;EACV,WAAW;EACX,YAAY;EACZ,iBAAiB;CAClB;AACD;EACE,eAAe;EACf,gBAAgB;EAChB,YAAY;EACZ,iBAAiB;CAClB;AACD;EACE,eAAe;EACf,gBAAgB;EAChB,YAAY;EACZ,iBAAiB;CAClB;AACD;EACE,eAAe;EACf,gBAAgB;EAChB,YAAY;EACZ,iBAAiB;EACjB,aAAa;CACd;AACD;EACE,uBAAuB;EACvB,iCAAiC;EACjC,sBAAsB;CACvB;AACD;EACE,sBAAsB;EACtB,YAAY;EACZ,SAAS;EACT,UAAU;EACV,0BAA0B;EAC1B,uDAAuD;EACvD,uBAAuB;EACvB,mBAAmB;CACpB;AACD;EACE,WAAW;EACX,eAAe;CAChB;AACD;EACE,iBAAiB;CAClB;AACD;AACE;IACE,YAAY;CACb;CACF;AACD;EACE,+BAA+B;EAC/B,4BAA4B;EAC5B,uBAAuB;EACvB,qCAAqC;EACrC,kCAAkC;EAClC,6BAA6B;EAC7B,kBAAkB;EAClB,aAAa;EACb,WAAW;EACX,iBAAiB;EACjB,WAAW;CACZ;AACD;EACE,UAAU;CACX;AACD;EACE,YAAY;EACZ,gBAAgB;EAChB,iBAAiB;CAClB;AACD;EACE,0BAA0B;EAC1B,WAAW;EACX,iBAAiB;CAClB;AACD;EACE,gBAAgB;EAChB,mBAAmB;EACnB,iBAAiB;EACjB,sCAAsC;EACtC,kBAAkB;EAClB,mBAAmB;CACpB;AACD;EACE,oBAAoB;EACpB,aAAa;EACb,eAAe;CAChB;AACD;EACE,aAAa;CACd;AACD;EACE,YAAY;EACZ,cAAc;CACf;AACD;EACE,oBAAoB;CACrB;AACD;EACE,kBAAkB;CACnB;AACD;EACE,eAAe;EACf,iBAAiB;CAClB;AACD;EACE,YAAY;EACZ,aAAa;EACb,kBAAkB;EAClB,kBAAkB;EAClB,eAAe;EACf,0BAA0B;CAC3B","file":"app.vue","sourcesContent":["h4 {\n  line-height: 2;\n}\np,\nstrong {\n  line-height: 1.5;\n}\n.T-vue-tree-docs {\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n  padding: 15px;\n}\n.T-vue-tree-docs * {\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\n.T-vue-tree-docs ul,\n.T-vue-tree-docs ol {\n  list-style: none;\n}\n.T-vue-tree-docs h1,\n.T-vue-tree-docs h2,\n.T-vue-tree-docs h3,\n.T-vue-tree-docs h4,\n.T-vue-tree-docs h5 {\n  margin: 0;\n  padding: 0;\n  width: auto;\n  line-height: 1.5;\n}\n.T-vue-tree-docs h1 {\n  margin: 20px 0;\n  font-size: 34px;\n  color: #333;\n  font-weight: 700;\n}\n.T-vue-tree-docs h2 {\n  margin: 20px 0;\n  font-size: 24px;\n  color: #333;\n  font-weight: 600;\n}\n.T-vue-tree-docs h3 {\n  margin: 15px 0;\n  font-size: 20px;\n  color: #555;\n  font-weight: 400;\n  border: none;\n}\n.T-vue-tree-docs .title-mark {\n  width: auto !important;\n  border-bottom: 1px solid #7E43E8;\n  display: inline-block;\n}\n.T-vue-tree-docs .title-mark:before {\n  display: inline-block;\n  content: '';\n  width: 0;\n  height: 0;\n  border: 6px solid #7E43E8;\n  border-color: transparent #7E43E8  #7E43E8 transparent;\n  vertical-align: bottom;\n  margin-right: 10px;\n}\n.T-vue-tree-docs .main-content {\n  width: 80%;\n  margin: 0 auto;\n}\n.T-vue-tree-docs .main-content .inner-main-content {\n  margin-top: 30px;\n}\n@media screen and (max-width: 990px) {\n  .T-vue-tree-docs .main-content {\n    width: 100%;\n  }\n}\n.T-vue-tree-docs .example-box {\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  -webkit-box-shadow: 0 0 2px 0 purple;\n  -moz-box-shadow: 0 0 2px 0 purple;\n  box-shadow: 0 0 2px 0 purple;\n  min-height: 100px;\n  height: auto;\n  width: 80%;\n  margin: 0 0 10px;\n  padding: 0;\n}\n.T-vue-tree-docs .example-box:last-child {\n  margin: 0;\n}\n.T-vue-tree-docs .example-box .example-title {\n  color: #333;\n  font-size: 16px;\n  line-height: 1.5;\n}\n.T-vue-tree-docs .example-box .example-inner-box {\n  border: 1px solid #dcdcdc;\n  width: 98%;\n  margin: 5px auto;\n}\n.T-vue-tree-docs .example-box .bottom .control-part {\n  cursor: pointer;\n  text-align: center;\n  line-height: 2.5;\n  background: rgba(194, 150, 192, 0.73);\n  border-left: none;\n  border-right: none;\n}\n.T-vue-tree-docs .example-box .bottom .code-part {\n  background: #f4f3f4;\n  padding: 7px;\n  overflow: auto;\n}\n.T-vue-tree-docs .example-box.padding {\n  padding: 7px;\n}\n.T-vue-tree-docs .demo1-tree-wrapper {\n  width: 100%;\n  height: 180px;\n}\n.T-vue-tree-docs .high-light-yellow {\n  background: #DACFA3;\n}\n.T-vue-tree-docs .btn {\n  padding: 7px 13px;\n}\n.T-vue-tree-docs .btn-block {\n  display: block;\n  margin: 0 0 10px;\n}\n.T-vue-tree-docs .example-result-box {\n  width: 100%;\n  height: auto;\n  min-height: 100px;\n  max-height: 400px;\n  overflow: auto;\n  border: 1px solid #dfdfdf;\n}\n"],"sourceRoot":""}]);
 
 // exports
 
