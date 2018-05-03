@@ -14,6 +14,7 @@
                            @onToggle="onToggleHandle"
                            @onCheck="onCheckHandle"
                            @onSelect="onSelectHandle"
+                           @onDblclickText="onDblclickTextHandle"
                     ></Ttree>
                 </div>
                 <div class="bottom">
@@ -63,10 +64,11 @@
             </div>
 
             <div class="example-box padding">
-                <h4 class="example-title">事件示例(现有3个事件)：</h4>
+                <h4 class="example-title">事件示例(现有4个事件)：</h4>
                 <strong>1. onToggle</strong><br>
                 <strong>2. onCheck</strong><br>
-                <strong>3. onSelect</strong><br>
+                <strong>3. onSelect</strong><em style="verticalAlign:baseline;paddingLeft:5px;font-size:12px;color: #666;">(这个事件可以看做是单击版的clickTextHandle)</em><br>
+                <strong>4. onDblclickTextHandle</strong><br>
                 <p>你可以f12打开控制台，然后分别点击选中节点、取消选中节点，勾选和取消勾选框，展开折叠节点，看看控制台打印的结果</p>
 
                 <h4 class="example-title" style="margin:10px 0 0;">方法示例：</h4>
@@ -84,7 +86,8 @@
                 <p><strong>例如：</strong></p>
                 <code>tree.checkNode({ key: 'id', val: [1, 1234556]});</code>
                 将勾选所有拥有id且id值为1和123456的的节点，并且对其父子节点勾上全勾选or半勾选效果。<router-link target='_blank' to='defaultCheckedNodes'>具体例子可见另例的'调用checkNode()方法勾选节点'按钮</router-link>
-
+                <p>5.</p>
+                expandNode({key, val}) 展开树节点，参数说明同上
 
                 <h4 class="example-title">结果展示：</h4>
                 <p>F12看控制台，点击每个按钮后得到的结果console.log了的，控制台更清晰</p>
@@ -405,6 +408,10 @@
             },
             onSelectHandle(val){
                 console.log('onSelectHandle', val);
+            },
+            onDblclickTextHandle(val) {
+                console.log('onDblclickTextHandle', val);
+
             },
             /**
              *

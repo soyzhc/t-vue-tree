@@ -140,6 +140,18 @@
                 }
             },
 
+            /**
+             * 文字をダブルクリックした時,選択状態にしないよ
+             * @param params
+             * @private
+             */
+            _handleDblClickText(params){
+                let that = this;
+
+                //今操作してるのツリーノードを外に通知
+                that.$emit('onDblclickText', params);
+            },
+
             _propagateUp(nodekey){
                 let that = this;
                 const parentKey = that.flatTree[nodekey].parent;
@@ -248,6 +260,11 @@
                 that.treeAllData = [];
             },
 
+            /**
+             * 勾选指定节点
+             * @param key
+             * @param val
+             */
             checkNode({key, val}){
                 if(!key || !val){throw '需要传入标识字段key和值val'}
                 let that = this;
@@ -280,6 +297,30 @@
                         indeterminated: false
                     });
                 });
+            },
+
+            /**
+             * 展开指定节点
+             * @param key
+             * @param val
+             */
+            expandNode({key, val}){
+                if(!key || !val){throw '需要传入标识字段key和值val'}
+                let that = this;
+                let idsObj = {};
+
+                val.forEach(it=>{
+                    idsObj[it] = true;
+                });
+                let flatNodes =  that.flatTree;
+
+                for(let i = 0,len = flatNodes.length;i < len;i++){
+                    let oNode = flatNodes[i];
+                    let oNodeCustormKey = oNode.node[key];
+                    if(idsObj[oNodeCustormKey]){
+                        that.$set(oNode.node, 'expanded', true);
+                    }
+                }
             }
         },
 
@@ -296,6 +337,7 @@
             that.$on('handleToggle', data => that.$emit('onToggle', data));
             that.$on('handleCheckbox', that._handleCheckbox);
             that.$on('handleClickText', that._handleClickText);
+            that.$on('handleDblClickText', that._handleDblClickText);
 
 //            this.$on('toggle-expand', node => this.$emit('on-toggle-expand', node));
         }

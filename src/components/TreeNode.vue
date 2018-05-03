@@ -23,7 +23,8 @@
                 <span class="text-wrapper"
                       :title="data.title"
                       :class="computedTextCls"
-                      @click="handleClick">
+                      @click="handleClick"
+                      @dblclick="handleDblclick">
                {{data.title}}
            </span>
 
@@ -67,7 +68,7 @@
         },
         data(){
             return {
-
+                timer: null,
 //                treeAllData:[]
                 nodeSelectable: true,
                 nodeSelectType: 'single'
@@ -128,14 +129,28 @@
 
             handleClick(){
                 let that = this;
-                let item = that.data;
+//                let item = that.data;
+                clearTimeout(that.timer);
+                that.timer = setTimeout(function() {
+                    let parent = that._getParent();
+
+                    /* このノードのselected状態を変え */
+                    if(that.nodeSelectable){
+                        that.$set(that.data, 'selected', !that.data.selected);
+                    }
+                    parent.$emit.apply(parent, ['handleClickText'].concat(that.data));
+                }, 200);
+            },
+
+            /**
+             * 双击文字节点
+             */
+            handleDblclick() {
+                let that = this;
+                clearTimeout(that.timer);
                 let parent = that._getParent();
 
-                /* このノードのselected状態を変え */
-                if(that.nodeSelectable){
-                    that.$set(that.data, 'selected', !that.data.selected);
-                }
-                parent.$emit.apply(parent, ['handleClickText'].concat(that.data));
+                parent.$emit.apply(parent, ['handleDblClickText'].concat(that.data));
             },
 
             handleExpand(){
