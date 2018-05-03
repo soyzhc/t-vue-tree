@@ -70,9 +70,21 @@
                 <p>你可以f12打开控制台，然后分别点击选中节点、取消选中节点，勾选和取消勾选框，展开折叠节点，看看控制台打印的结果</p>
 
                 <h4 class="example-title" style="margin:10px 0 0;">方法示例：</h4>
+                <p>1.</p>
                 <button class="btn btn-block" @click="getCheckedNodes('checked')">获取checked节点 getCheckedNodes('checked')</button>
+                <p>2.</p>
                 <button class="btn btn-block" @click="getCheckedNodes('indeterminated')">获取 半勾选的节点 getCheckedNodes('indeterminated')</button>
+                <p>3.</p>
                 <button class="btn btn-block" @click="getSelectedNodes()">获取所有选中的节点 getSelectedNodes()</button>
+                <p>4.</p>
+                checkNode({key, val}) 勾选树节点，与该节点相关的父子节点会自动勾上勾选或者半勾选状态
+                <p><strong>参数说明：</strong></p>
+                <p>key: Sring | 节点的键</p>
+                <p>val: Array | key键对应的值，是个数组，</p>
+                <p><strong>例如：</strong></p>
+                <code>tree.checkNode({ key: 'id', val: [1, 1234556]});</code>
+                将勾选所有拥有id且id值为1和123456的的节点，并且对其父子节点勾上全勾选or半勾选效果。<router-link target='_blank' to='defaultCheckedNodes'>具体例子可见另例的'调用checkNode()方法勾选节点'按钮</router-link>
+
 
                 <h4 class="example-title">结果展示：</h4>
                 <p>F12看控制台，点击每个按钮后得到的结果console.log了的，控制台更清晰</p>

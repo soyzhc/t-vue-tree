@@ -7,9 +7,9 @@
         <section class="inner-main-content">
             <h3 class="title-mark">例子</h3>
             <br>
-            <button type="button" class="btn" @click="checkedParentNodeTree">初始勾选第一个父节点的树</button>
-            <p>注意：这种写法，只会勾选上第一个父节点，不会勾上子节点。这是正常的，组件设计如此。如果你需要勾上内部的子节点，需要自行处理传入数据中的子节点的checked的状态为'checked'或者'indeterminated'或者''</p>
-            <button type="button" class="btn" @click="checkNodes">勾选节点</button>
+            <button type="button" class="btn" @click="checkedParentNodeTree">设置第一个节点的checked属性为true</button>
+            <p>注意：这种写法，只会勾选上该节点的前面的勾选框，不会有相关父子节点的级联勾选效果。这是正常的，组件设计如此。如果你需要勾上内部的子节点，我推荐使用方法：checkNode()</p>
+            <button type="button" class="btn" @click="checkNodes">调用checkNode()方法勾选节点</button>
             <button type="button" class="btn" @click="checkedLeafNodeTree">初始勾选第一个子节点的树</button>
             <div class="example-box" ref="containerNode">
                 <div class="top demo1-tree-wrapper">

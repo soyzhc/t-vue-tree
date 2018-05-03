@@ -1,7 +1,7 @@
 {
 	"name": "t-vue-tree",
 	"version": "1.1.6",
-	"description": "",
+	"description": "vue tree based on vue2.5.9",
 	"main": "dist/Ttree.min.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
